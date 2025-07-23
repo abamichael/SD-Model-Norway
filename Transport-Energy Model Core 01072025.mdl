@@ -1,0 +1,2119 @@
+{UTF-8}
+"1 dollar" = 1
+	~	Dollars/Year
+	~		|
+
+"1 Yr" = 1
+	~	Year
+	~		|
+
+Additional capacity = 100 / TRANSMISSION CAP BUILD TIME 
+	~	MW/Year
+	~		|
+
+"Annual ICV R & D Expenditure" = 5e+08
+	~	Dollars/Year
+	~		|
+
+"Annual R & D Expenditure" = 1e+09
+	~	Dollars/Year
+	~		|
+
+"Annual R&D Investment" = 1e+06
+	~	Dollars/Year
+	~		|
+
+Available Charging stations = INTEG( Charging stations deployed - Charging stations scrappage
+                  , "INITIAL NO. OF CHARGING STATIONS" ) 
+	~	Stations
+	~		|
+
+Available refuel stations = INTEG( refuel stations deployed - Refuel stations scrappage
+                  , INITIAL REFUEL STATIONS ) 
+	~	Stations
+	~		|
+
+Average Annual emissions limit = AVKT * Emissions target * "1 Yr" 
+	~	kgCO2/Car
+	~		|
+
+AVERAGE DAILY PRODUCTION = WITH LOOKUP( Time , ([(2.45,2.45)-(2050,2.5)],(2008,2.45),
+            (2011,2.37),(2012,2.34),(2013,2.19),(2014,2.05),(2015,2.2),(2016,1.9),(2017,1.97)
+            ,(2018,2),(2019,2.1),(2020,1.89),(2021,1.68),(2022,1.45),(2023,1.54),(2024,1.5)
+            ,(2025,2),(2030,2.5),(2050,2.5) ) )
+	~	MBBL/Day
+	~		|
+
+AVERAGE ELECTRICITY SUPPLY EMISSIONS = 0.016
+	~	kgCO2/kWh
+	~		|
+
+Average electricity supply emissions per km = ZIDZ ( AVERAGE ELECTRICITY SUPPLY EMISSIONS
+             , 1 / EV FUEL ECONOMY ) 
+	~	kgCO2/km
+	~		|
+
+Average Emissions per EV = EV emissions / EV Stocks 
+	~	kgCO2/Car
+	~		|
+
+Average ICV emissions = ICV emissions / ICV Stocks 
+	~	kgCO2/Car
+	~		|
+
+Average petrol fuel emissions per km = ZIDZ ( PETROL FUEL SUPPLY EMISSION FACTOR , 1 
+                  / ICV FUEL ECONOMY ) 
+	~	kgCO2/km
+	~		|
+
+AVKT = 13621
+	~	km/(Car*Year)
+	~		|
+
+Base cost = Base cost Experience factor * INITIAL BASE COST 
+	~	USD
+	~		|
+
+Base cost Experience factor = ( Cumulative ICV Engine production 0 / Reference Base cost Experience level
+             ) ^ - Strength of Base cost learning curve 
+	~	Dmnl
+	~		|
+
+Base costs learning rate = 0.05
+	~	Dmnl
+	~		|
+
+Battery Capacity = IF THEN ELSE ( Time < 2019, 24, 37) 
+	~	kWh
+	~		|
+
+BATTERY COST LR = 0.25
+	~	Dmnl
+	~		|
+
+Battery Exp Factor = ( "Cumulative Battery R&D Investment" / "REFERENCE BATTERY R&D INVESTMENT"
+             ) ^ - Strength of Battery learning curve 
+	~	Dmnl
+	~		|
+
+"Battery R&D Investment" = "Annual R&D Investment" 
+	~	Dollars/Year
+	~		|
+
+BBL TO M BBL CONVERTER = 1e+06
+	~	BBL/MBBL
+	~		|
+
+CAPACITY FACTOR = 0.8
+	~	Dmnl
+	~		|
+
+Capacity utilization = Operational grid capacity / Total Generation capacity 
+	~	Dmnl
+	~		|
+
+Capex = 1800
+	~	USD/kWh
+	~		|
+
+Change in Charger to EV ratio = ( CHARGER TO EVE RATION LIMIT - charger to EV ratio ) 
+             / TIME TO CHANGE CHARGER TO EV RATIO 
+	~	Stations/Car/Year
+	~		|
+
+Change in GDP = ( GDP PER CAPITA GROWTH RATE * Gross Domestic Product per capita ) 
+	~	Dollars/(Year*Year)
+	~		|
+
+Change in station to ICV ratio = ( STATION TO ICV RATION LIMIT - refuel station to ICV ratio
+             ) / TIME TO CHANGE REFUEL STATIONS TO ICV RATIO 
+	~	Stations/Car/Year
+	~		|
+
+charger to EV ratio = INTEG( Change in Charger to EV ratio , INITIAL CHARGER TO EV RATIO
+             ) 
+	~	Stations/Car
+	~		|
+
+CHARGER TO EVE RATION LIMIT = 0.04
+	~	Stations/Car
+	~		|
+
+Charging station coverage = Available Charging stations / Total stations 
+	~	Dmnl
+	~		|
+
+Charging station deficit = MAX ( 0, Optimal charger required - Total Chargers ) 
+	~	Stations
+	~		|
+
+CHARGING STATION LIFESPAN = 20
+	~	Year
+	~		|
+
+Charging stations deployed = ZIDZ ( Charging stations under construction , Time to Deploy Charging station
+             ) 
+	~	Stations/Year
+	~		|
+
+CHARGING STATIONS IN PLANNING = Charging station deficit / CHARGING STATIONS IN PLANNING APPROVAL RATE
+             
+	~	Stations/Year
+	~		|
+
+CHARGING STATIONS IN PLANNING APPROVAL RATE = 1
+	~	Year
+	~		|
+
+Charging stations scrappage = ZIDZ ( Available Charging stations , CHARGING STATION LIFESPAN
+             ) 
+	~	Stations/Year
+	~		|
+
+Charging stations under construction = INTEG( CHARGING STATIONS IN PLANNING - Charging stations deployed
+                  , 0) 
+	~	Stations
+	~		|
+
+Constant = -2.07666
+	~	Dmnl
+	~		|
+
+Construction time = 10
+	~	
+	~		|
+
+CRF = ( DISCOUNT RATE * ( 1 + DISCOUNT RATE ) ^ HYDRO - POWER PLANT LIFE ) / ( ( ( 1 
+                  + DISCOUNT RATE ) ^ HYDRO - POWER PLANT LIFE ) - 1) 
+	~	Dmnl
+	~		|
+
+Crude oil reserves = INTEG( - Oil production , INITIAL CRUDE OIL RESERVES ) 
+	~	MBBL
+	~		|
+
+"Cumulative Battery R&D Investment" = INTEG( "Battery R&D Investment" , "REFERENCE BATTERY R&D INVESTMENT"
+             ) 
+	~	USD
+	~		|
+
+Cumulative Electric Vehicle production = INTEG( Electric Vehicle production , 100000) 
+	~	Car
+	~		|
+
+Cumulative ICV Engine production = INTEG( ICV Engine production , Reference ICV Engine Production level
+             ) 
+	~	Car
+	~		|
+
+Cumulative ICV Engine production 0 = INTEG( ICV Engine production 0 , 100000) 
+	~	Car
+	~		|
+
+"Cumulative ICV R & D Expenditure" = INTEG( "ICV R & D Expenditure" , "INITIAL ICV R & D INVESTMENT"
+             ) 
+	~	USD
+	~		|
+
+"Cumulative R & D Expenditure" = INTEG( "R & D Expenditure" , "INITIAL R & D INVESTMENT"
+             ) 
+	~	USD
+	~		|
+
+DAYS OF THE YEAR = 365
+	~	Days/Year
+	~		|
+
+Developing bioenergy plant = 100 / Bio - energy plant Construction time 
+	~	MW/Year
+	~		|
+
+Developing capacity = 100 / Construction time 
+	~	MW/Year
+	~		|
+
+Developing NG CCGT capacity = 100 / NG CCGT Construction time 
+	~	MW/Year
+	~		|
+
+Developing solar PV capacity = 100 / SOLAR PV Construction time 
+	~	MW/Year
+	~		|
+
+DIRECT CONTACT EFFECT = 0.25
+	~	Dmnl/Year
+	~		|
+
+Discards = Total Vehicle Discards 
+	~	Car/Year
+	~		|
+
+DISCOUNT RATE = 0.11
+	~	Dmnl/Year
+	~		|
+
+Effect of Charging station coverage = ( Refuel stations coverage / Reference EV CHARGING STATION COVERAGE
+             ) * Sensitivity of ICV Sensitivity station coverage 
+	~	Dmnl
+	~		|
+
+Effect of Culture = ( PFAD INDEX / reference of culture effect ) * Sensitivity of National Cultural Index
+             
+	~	Dmnl
+	~		|
+
+Effect of EV Affordability = Sensitivity of Affordability * ( EV Affordability Utility
+             / Reference Affordability ) 
+	~	Dmnl
+	~		|
+
+Effect of EV O M cost = ( EV Maintenance cost + Effective EV FE * EV Fuel Cost ) * "EV O&M cost Sensitivity"
+             
+	~	Dmnl
+	~		|
+
+Effect of EV Range = EV Relative Range Index * Sensitivity of Range 
+	~	Dmnl
+	~		|
+
+Effect of EV station Coverage = Sensitivity of EV Charging stations * ( Charging station coverage
+             / Reference EV CHARGING STATION COVERAGE ) 
+	~	Dmnl
+	~		|
+
+Effect of HDI on EV adoption = Sensitivity of HDI * ( Human Development Index / Ref HDI Index
+                  ) 
+	~	Dmnl
+	~		|
+
+effect of ICV affordability = ( ICV Affordability Utility / Reference Affordability ) 
+             * Sensitivity of ICV affordability 
+	~	Dmnl
+	~		|
+
+Effect of ICV emissions = ( Average ICV emissions / Average Annual emissions limit ) 
+             * Sensitivity of ICV emissions 
+	~	Dmnl
+	~		|
+
+"Effect of ICV O & M cost" = ( ICV Maintenance cost + effective ICV FE * ICV Fuel Cost
+                  ) * "ICV O&M Sensitivity" 
+	~	Dmnl
+	~		|
+
+Effect of Range = ICV Relative Range Index * Sensitivity of ICV Range 
+	~	Dmnl
+	~		|
+
+Effect of social exposure on forgetfulness = EXP ( -4 * epsilon * ( Total network effect
+                  - REFERENCE SOCIAL EXPOSURE ) ) / ( 1 + EXP ( -4 * epsilon * ( Total network effect
+                            - REFERENCE SOCIAL EXPOSURE ) ) ) 
+	~	Dmnl
+	~		|
+
+Effective EV FE = EV FUEL ECONOMY * "R & D Factor" 
+	~	kWh/km
+	~		|
+
+effective ICV FE = ICV FUEL ECONOMY * "ICV R & D Factor" 
+	~	L/km
+	~		|
+
+"Elect-BBL converter" = 0.000588441
+	~	BBL/kWh
+	~		|
+
+Electric Vehicle production = EV New Sales 
+	~	Car/Year
+	~		|
+
+EMBODIED EMISSIONS = 0.016
+	~	kgCO2/km
+	~		|
+
+Emissions per car = Total emissions / total vehicle market 
+	~	TCO2/Car
+	~		|
+
+Emissions target = 0.085
+	~	kgCO2/km
+	~		|
+
+epsilon = 1 / REFERENCE SOCIAL EXPOSURE 
+	~	Year
+	~		|
+
+EV Affordability Utility = ( ( "EV Price + tax" / one thousand dollars ) / LN GDP ) 
+	~	Dmnl
+	~		|
+
+EV Attractiveness = EV Network effect * EV Utility 
+	~	Dmnl
+	~		|
+
+EV Discards = EV Stocks / EV LIFETIME 
+	~	Car/Year
+	~		|
+
+EV Electricity demand = AVKT * EV Stocks * Effective EV FE 
+	~	kWh/Year
+	~		|
+
+EV emissions = INTEG( "EV emissions flow-in" - EV Emissions outflow , 0) 
+	~	kgCO2
+	~		|
+
+"EV emissions flow-in" = ( Average electricity supply emissions per km + EMBODIED EMISSIONS
+             + EV TAIL PIPE EMISSION ) * EV Stocks * AVKT 
+	~	kgCO2/Year
+	~		|
+
+EV Emissions outflow = EV emissions / "1 Yr" 
+	~	kgCO2/Year
+	~		|
+
+EV environmental Impact = ( Average Emissions per EV / Average Annual emissions limit
+             ) * Sensitivity to environmental impact 
+	~	Dmnl
+	~		|
+
+EV Experience factor = ( Cumulative Electric Vehicle production / Reference Electric Vehicle Production level
+             ) ^ - Strength of EV Production Strength curve 
+	~	Dmnl
+	~		|
+
+EV Fuel Cost = WITH LOOKUP( Time , ([(0.3,0.3)-(2050,0.02)],(2008,0.02),(2009,0.01),(2010,0.02)
+            ,(2011,0.02),(2012,0.01),(2013,0.01),(2014,0.01),(2015,0.01),(2016,0.01),
+            (2018,0.01),(2019,0.01),(2020,0.01),(2021,0.01),(2022,0.02),(2023,0.04),(2023,0.02)
+            ,(2050,0.03) ) )
+	~	USD/kWh
+	~		|
+
+EV FUEL ECONOMY = 0.2
+	~	kWh/km
+	~		|
+
+EV LIFETIME = 16
+	~	Year
+	~		|
+
+EV Maintenance cost = 0.052
+	~	USD/km
+	~		|
+
+EV MARKET ADJUST FACTOR = 0.01277
+	~	Dmnl
+	~		|
+
+EV Market Share = EV Stocks / total vehicle market 
+	~	Dmnl
+	~		|
+
+EV MSRP = EV Total cost * ( 1 + Markup ) 
+	~	USD
+	~		|
+
+EV Network effect = INTEG( Network effect gain - Network effect loss , INITIAL NETWORK EFFECT
+             ) 
+	~	Dmnl
+	~		|
+
+EV New Sales = Sales * Share of EV sales 
+	~	Car/Year
+	~		|
+
+"EV O&M cost Sensitivity" = -0.00109
+	~	Dmnl/USD*km
+	~		|
+
+"EV Price + tax" = IF THEN ELSE ( Time <= POLICY END DATE , EV MSRP , EV MSRP * ( 1 + 
+                       VEHICLE PURCHASE TAX ) * ( 1 + VAT ) ) 
+	~	USD
+	~		|
+
+EV Production costs learning rate = 0.7
+	~	Dmnl
+	~		|
+
+EV Range = Battery Capacity / Effective EV FE 
+	~	km
+	~		|
+
+EV Relative Range Index = EV Range / Reference Desirable Range 
+	~	Dmnl
+	~		|
+
+EV Stocks = INTEG( EV New Sales - EV Discards , INITIAL EV STOCK ) 
+	~	Car
+	~		|
+
+EV TAIL PIPE EMISSION = 0
+	~	kgCO2/km
+	~		|
+
+EV Total cost = Base cost + ( Battery Capacity * Unit Battery Cost ) 
+	~	USD
+	~		|
+
+EV Utility = EXP ( Effect of EV Affordability ) * EXP ( Effect of EV station Coverage
+                  ) * EXP ( Effect of EV Range ) * EXP ( Effect of Culture ) * EXP ( 
+                  Effect of HDI on EV adoption ) * EXP ( Effect of EV O M cost ) * EXP ( 
+                  EV environmental Impact ) 
+	~	Dmnl
+	~	EXP(Effect of EV Affordability+Effect of EV stationCoverage+Effect of EV \
+		Range+Effect of Culture +Effect of HDI on EV adoption+Effect of EV O M \
+		cost+EV environmental Impact)
+	|
+
+EVA INDEX = ( ( 1 - INDIVIDUALISM ) + ( 1 - INDULGENCE INDEX ) + ( 1 - LONG - TERM MINDSET
+                  ) + ( MASCULINITY INDEX ) + ( POWER DISTANCE INDEX ) + ( UNCERTAINTY AVOIDANCE
+             ) ) / 10
+	~	Dmnl
+	~		|
+
+EXPORT DEMAND = 2 * 365
+	~	MBBL/Year
+	~		|
+
+FOM = 13.77
+	~	USD/kWh
+	~		|
+
+FORGETTING RATE = 0.05
+	~	1/Year [0,?,1]
+	~		|
+
+Fuel Demand per car = ZIDZ ( Total fuel demand , total vehicle market ) 
+	~	BBL/Year/Car
+	~		|
+
+FX RATE = WITH LOOKUP( Time , ([(5.6361,5.6361)-(2050,10.8)],(2008,5.6361),(2009,6.2817)
+            ,(2010,6.0453),(2011,5.6074),(2012,5.821),(2013,5.8768),(2014,6.3019),(2015,8.0739)
+            ,(2016,8.3987),(2017,8.263),(2018,8.1338),(2019,8.8037),(2020,9.4004),(2021,8.5991)
+            ,(2022,9.6245),(2023,10.5647),(2024,10.7433),(2050,10.8) ) )
+	~	NOK/Dollars
+	~		|
+
+GDP PER CAPITA GROWTH RATE = WITH LOOKUP( Time , ([(-0.4,-0.4)-(2100,0.05)],(2008,0),
+            (2009,0),(2010,0),(2011,0.15),(2012,0.01),(2012,0.01),(2013,-0.06),(2014,-0.23)
+            ,(2015,-0.05),(2016,0.08),(2017,0.09),(2018,-0.08),(2019,-0.11),(2020,0.36)
+            ,(2021,0.17),(2022,-0.19),(2023,0),(2024,0.022),(2025,0.019),(2050,0.015)
+            ,(2100,0.015) ) )
+	~	1/Year
+	~		|
+
+Gross Domestic Product per capita = INTEG( Change in GDP , INITIAL GROSS DOMESTIC PRODUCT per capita
+             ) 
+	~	Dollars/Year
+	~		|
+
+HDI change = ( HDI MAXIMUM LIMIT - Human Development Index ) / TIME TO CHANGE HDI 
+	~	Dmnl/Year
+	~		|
+
+HDI MAXIMUM LIMIT = 1
+	~	Dmnl
+	~		|
+
+HEAT RATE = 0
+	~	btu/kWh
+	~		|
+
+Human Development Index = INTEG( HDI change , INITIAL HDI ) 
+	~	Dmnl
+	~		|
+
+IC Engine cost = ICV Engine Experience factor * INITIAL IC ENGINE COST 
+	~	USD
+	~		|
+
+ICE TANK CAPACITY = 30
+	~	L
+	~		|
+
+ICV Affordability Utility = ( ( "ICV Price + Tax" / one thousand dollars ) / LN GDP ) 
+	~	Dmnl
+	~		|
+
+ICV Attractiveness = ICV Network effect * ICV Utility 
+	~	Dmnl
+	~		|
+
+ICV DIRECT CONTACT EFFECT = 0.0475
+	~	Dmnl/Year
+	~		|
+
+ICV Discards = ICV Stocks / ICV LIFETIME 
+	~	Car/Year
+	~		|
+
+ICV Effect of social exposure on forgetfulness = EXP ( -4 * ICV epsilon * ( ICV Total network effect
+                  - ICV REFERENCE SOCIAL EXPOSURE ) ) / ( 1 + EXP ( -4 * ICV epsilon 
+                            * ( ICV Total network effect - ICV REFERENCE SOCIAL EXPOSURE
+                                 ) ) ) 
+	~	Dmnl
+	~		|
+
+ICV EMBODIED EMISSIONS = 0.016
+	~	kgCO2/km
+	~		|
+
+ICV emissions = INTEG( "ICV emissions flow-in" - ICV Emissions outflow , 0) 
+	~	kgCO2
+	~		|
+
+"ICV emissions flow-in" = ( Average petrol fuel emissions per km + ICV EMBODIED EMISSIONS
+             + ICV TAIL PIPE EMISSION ) * ICV Stocks * AVKT 
+	~	kgCO2/Year
+	~		|
+
+ICV Emissions outflow = ICV emissions / "1 Yr" 
+	~	kgCO2/Year
+	~		|
+
+ICV Engine Experience factor = ( Cumulative ICV Engine production / Reference ICV Engine Production level
+             ) ^ - Strength of ICV Engine Production Strength curve 
+	~	Dmnl
+	~		|
+
+ICV Engine production = ICV New Sales 
+	~	Car/Year
+	~		|
+
+ICV Engine production 0 = ICV New Sales 
+	~	Car/Year
+	~		|
+
+ICV Engine Production costs learning rate = 0.1
+	~	Dmnl
+	~		|
+
+ICV epsilon = 1 / ICV REFERENCE SOCIAL EXPOSURE 
+	~	Year
+	~		|
+
+ICV FORGETTING RATE = 0.558775
+	~	1/Year [0,?,1]
+	~		|
+
+ICV Fuel Cost = WITH LOOKUP( Time , ([(0.18,0.18)-(2050,0.25)],(2008,0.18),(2009,0.16)
+            ,(2010,0.17),(2011,0.21),(2012,0.21),(2013,0.21),(2014,0.2),(2015,0.14),(2016,0.13)
+            ,(2017,0.15),(2018,0.16),(2019,0.15),(2020,0.13),(2021,0.16),(2022,0.19),
+            (2023,0.17),(2050,0.25) ) )
+	~	USD/L
+	~		|
+
+ICV FUEL ECONOMY = 0.0836
+	~	L/km
+	~		|
+
+ICV INDIRECT CONTACT EFFECT = 0.0016
+	~	Dmnl/Year
+	~		|
+
+ICV INITIAL NETWORK EFFECT = 1
+	~	Dmnl
+	~		|
+
+ICV LIFETIME = 20
+	~	Year
+	~		|
+
+ICV Maintenance cost = 0.077
+	~	USD/km
+	~		|
+
+ICV Market share = ICV Stocks / total vehicle market 
+	~	Dmnl
+	~		|
+
+ICV MARKETING EFFECTIVENESS = 0
+	~	Dmnl/Year
+	~		|
+
+ICV MSRP = ICV Total cost * ( 1 + Markup ) 
+	~	USD
+	~		|
+
+ICV Network effect = INTEG( ICV Network effect gain - ICV Network effect loss , ICV INITIAL NETWORK EFFECT
+             ) 
+	~	Dmnl
+	~		|
+
+ICV Network effect gain = ICV Total network effect * ( 1 - ICV Network effect ) 
+	~	Dmnl/Year
+	~		|
+
+ICV Network effect loss = ICV Effect of social exposure on forgetfulness * ICV FORGETTING RATE
+             * ICV Network effect 
+	~	Dmnl/Year
+	~		|
+
+ICV New Sales = Sales * Share of ICV Sales 
+	~	Car/Year
+	~		|
+
+"ICV O&M Sensitivity" = -0.07722
+	~	Dmnl/USD*km
+	~		|
+
+"ICV Price + Tax" = ICV MSRP * ( 1 + VEHICLE PURCHASE TAX ) * ( 1 + VAT ) 
+	~	USD
+	~		|
+
+"ICV R & D Expenditure" = "Annual ICV R & D Expenditure" 
+	~	Dollars/Year
+	~		|
+
+"ICV R & D Factor" = ( "Cumulative ICV R & D Expenditure" / "Reference ICV R & D Investment"
+             ) ^ - "Strength of ICV R & D Learning curve" 
+	~	Dmnl
+	~		|
+
+"ICV R&D Learning rate" = 0.1
+	~	Dmnl
+	~		|
+
+ICV Range = ICE TANK CAPACITY / effective ICV FE 
+	~	km
+	~		|
+
+ICV REFERENCE SOCIAL EXPOSURE = 0.05
+	~	1/Year
+	~		|
+
+ICV REFUELING STATIONS IN PLANNING APPROVAL RATE = 5
+	~	Year
+	~		|
+
+ICV Relative Range Index = ICV Range / Reference Desirable Range 
+	~	Dmnl
+	~		|
+
+ICV Stocks = INTEG( ICV New Sales - ICV Discards , INITIAL ICV STOCK ) 
+	~	Car
+	~		|
+
+ICV TAIL PIPE EMISSION = 0.012
+	~	kgCO2/km
+	~		|
+
+ICV Total cost = Base cost + IC Engine cost 
+	~	USD
+	~		|
+
+ICV Total network effect = ICV DIRECT CONTACT EFFECT * ICV Market share + ICV INDIRECT CONTACT EFFECT
+             * ICV Market share + ICV MARKETING EFFECTIVENESS 
+	~	Dmnl/Year
+	~		|
+
+ICV Utility = EXP ( Effect of Charging station coverage ) * EXP ( effect of ICV affordability
+                  ) * EXP ( Effect of Range + "Effect of ICV O & M cost" ) * EXP ( Effect of ICV emissions
+                  ) * EXP ( Constant ) 
+	~	Dmnl
+	~		|
+
+INDIRECT CONTACT EFFECT = 0.15
+	~	Dmnl/Year
+	~		|
+
+INDIVIDUALISM = 0.81
+	~	Dmnl
+	~		|
+
+INDULGENCE INDEX = 0.55
+	~	Dmnl
+	~		|
+
+INITIAL BASE COST = 15000
+	~	USD
+	~		|
+
+INITIAL BIOENERGY CAPACITY = 100
+	~	MW
+	~		|
+
+INITIAL CHARGER TO EV RATIO = "INITIAL NO. OF CHARGING STATIONS" / INITIAL EV STOCK 
+	~	Stations/Car
+	~		|
+
+INITIAL CRUDE OIL RESERVES = 37000
+	~	MBBL
+	~		|
+
+INITIAL EV STOCK = 1693
+	~	Car
+	~		|
+
+INITIAL GROSS DOMESTIC PRODUCT per capita = 87823.8
+	~	Dollars/Year
+	~		|
+
+INITIAL HDI = 0.94
+	~	Dmnl
+	~		|
+
+INITIAL HYDRO CAPACITY = 2080
+	~	MW
+	~		|
+
+INITIAL IC ENGINE COST = 3000
+	~	USD
+	~		|
+
+"INITIAL ICV R & D INVESTMENT" = 5e+08
+	~	USD
+	~		|
+
+INITIAL ICV STOCK = 2.1955e+06
+	~	Car
+	~		|
+
+INITIAL NETWORK EFFECT = 0.0001
+	~	Dmnl
+	~		|
+
+INITIAL NG CCGT CAPACITY = 6140
+	~	MW
+	~		|
+
+"INITIAL NO. OF CHARGING STATIONS" = 2800
+	~	Stations
+	~		|
+
+"INITIAL R & D INVESTMENT" = 5e+10
+	~	USD
+	~		|
+
+INITIAL REFUEL STATION TO ICV RATIO = INITIAL REFUEL STATIONS / INITIAL ICV STOCK 
+	~	Stations/Car
+	~		|
+
+INITIAL REFUEL STATIONS = 1799
+	~	Stations
+	~		|
+
+INITIAL SOLAR PV CAPACITY = 0
+	~	MW
+	~		|
+
+INITIAL TRANSM CAP = 7300
+	~	MW
+	~		|
+
+INITIAL UNIT BATTERY COST = 1400
+	~	USD/kWh
+	~		|
+
+INITIAL VEHICLE STOCK = 2.19719e+06
+	~	Car
+	~		|
+
+kg to Tons converter = 1000
+	~	kgCO2/TCO2
+	~		|
+
+LCOE Hydro = ( ( Capex * CRF + FOM ) / ( 8760 * CAPACITY FACTOR ) + ( SPECIFIC FUEL * 
+                  HEAT RATE ) ) + VOM 
+	~	Dmnl
+	~	((Capex[Plant_type]*CRF[Plant_type]+FOM[Plant_type])/(8760*Capacity__Factor\
+		[Plant_type])) + \
+		(Specific__fuel[Plant_type]*Heat__rate[Plant_type])+VOM[Plant_type]
+	|
+
+LN GDP = LN ( Gross Domestic Product per capita / "1 dollar" ) 
+	~	Dmnl
+	~		|
+
+MARKET GROWTH RATE = 0.022
+	~	Dmnl/Year
+	~		|
+
+MARKETING EFFECTIVENESS = IF THEN ELSE ( Time >= "MARKETING POLICY ADJUST. DATE" , EV MARKET ADJUST FACTOR
+             * 0.5 / "1 Yr" , EV MARKET ADJUST FACTOR / "1 Yr" ) 
+	~	Dmnl/Year
+	~		|
+
+"MARKETING POLICY ADJUST. DATE" = 2030
+	~	Year
+	~		|
+
+Markup = 0.1
+	~	Dmnl
+	~		|
+
+MASCULINITY INDEX = 0.08
+	~	Dmnl
+	~		|
+
+Network effect gain = Total network effect * ( 1 - EV Network effect ) 
+	~	Dmnl/Year
+	~		|
+
+Network effect loss = Effect of social exposure on forgetfulness * FORGETTING RATE * 
+             EV Network effect 
+	~	Dmnl/Year
+	~		|
+
+NG CCGT capacity = INTEG( Developing NG CCGT capacity - Retiring NG CCGT capacity , INITIAL NG CCGT CAPACITY
+             ) 
+	~	MW
+	~		|
+
+NG CCGT Construction time = 3
+	~	
+	~		|
+
+NG CCGT LIFE = 30
+	~	Year
+	~		|
+
+Oil export = MIN ( EXPORT DEMAND , Oil production - ( Passenger transport demand / BBL TO M BBL CONVERTER
+                       ) ) 
+	~	MBBL/Year
+	~		|
+
+Oil production = AVERAGE DAILY PRODUCTION * DAYS OF THE YEAR 
+	~	MBBL/Year
+	~		|
+
+one thousand dollars = 1000
+	~	USD
+	~		|
+
+Operational capacity factor = 0.97
+	~	Dmnl
+	~	IF(TIME<2024) THEN(0.48) ELSE(MIN(0.97,0.48*(1.05)^(TIME-2023)))
+	|
+
+Operational grid capacity = MIN ( Total Generation capacity , Operational capacity factor
+             * Transmission wheeling capacity ) 
+	~	MW
+	~		|
+
+Optimal charger required = charger to EV ratio * EV Stocks 
+	~	Stations
+	~		|
+
+optimal refuel stations = ICV Stocks * refuel station to ICV ratio 
+	~	Stations
+	~		|
+
+Passenger transport demand = Petrol Fuel Demand * "Petrol Fuel-BBL Converter" 
+	~	BBL/Year
+	~		|
+
+Petrol Fuel Demand = AVKT * effective ICV FE * ICV Stocks 
+	~	L/Year
+	~		|
+
+PETROL FUEL SUPPLY EMISSION FACTOR = 0.5519
+	~	kgCO2/L
+	~		|
+
+"Petrol Fuel-BBL Converter" = 1 / 159
+	~	BBL/L
+	~		|
+
+PFAD INDEX = 1 - ( EVA INDEX ) 
+	~	Dmnl
+	~		|
+
+POLICY END DATE = 2050
+	~	Year
+	~		|
+
+POWER DISTANCE INDEX = 0.31
+	~	Dmnl
+	~		|
+
+"R & D Expenditure" = "Annual R & D Expenditure" 
+	~	Dollars/Year
+	~		|
+
+"R & D Factor" = ( "Cumulative R & D Expenditure" / "Reference R & D Investment" ) ^ 
+             - "Strength of R & D Learning curve" 
+	~	Dmnl
+	~		|
+
+"R&D Learning rate" = 0.2
+	~	Dmnl
+	~		|
+
+Ref HDI Index = 0.8
+	~	Dmnl
+	~		|
+
+Reference Affordability = 1
+	~	Dmnl
+	~	?????
+	|
+
+Reference Base cost Experience level = 100000
+	~	Car
+	~		|
+
+"REFERENCE BATTERY R&D INVESTMENT" = 1e+07
+	~	USD
+	~		|
+
+Reference Desirable Range = 500
+	~	km
+	~		|
+
+Reference Electric Vehicle Production level = 100000
+	~	Car
+	~		|
+
+Reference EV CHARGING STATION COVERAGE = 0.2
+	~	Dmnl
+	~		|
+
+Reference ICV Engine Production level = 100000
+	~	Car
+	~		|
+
+"Reference ICV R & D Investment" = 5e+08
+	~	USD
+	~		|
+
+reference of culture effect = 0.7
+	~	Dmnl
+	~		|
+
+"Reference R & D Investment" = 5e+10
+	~	USD
+	~		|
+
+REFERENCE SOCIAL EXPOSURE = 0.05
+	~	1/Year
+	~		|
+
+REFUEL STATION COMMISSIONING TIME = 1
+	~	Year
+	~		|
+
+Refuel station deficit = MAX ( 0, optimal refuel stations - Total Refuel stations ) 
+	~	Stations
+	~		|
+
+REFUEL STATION LIFESPAN = 25
+	~	Year
+	~		|
+
+refuel station to ICV ratio = INTEG( Change in station to ICV ratio , INITIAL REFUEL STATION TO ICV RATIO
+             ) 
+	~	Stations/Car
+	~		|
+
+Refuel stations coverage = Available refuel stations / Total stations 
+	~	Dmnl
+	~		|
+
+refuel stations deployed = ZIDZ ( Refuel stations under construction , REFUEL STATION COMMISSIONING TIME
+             ) 
+	~	Stations/Year
+	~		|
+
+Refuel stations in planning = Refuel station deficit / ICV REFUELING STATIONS IN PLANNING APPROVAL RATE
+             
+	~	Stations/Year
+	~		|
+
+Refuel stations scrappage = ZIDZ ( Available refuel stations , REFUEL STATION LIFESPAN
+             ) 
+	~	Stations/Year
+	~		|
+
+Refuel stations under construction = INTEG( Refuel stations in planning - refuel stations deployed
+                  , 0) 
+	~	Stations
+	~		|
+
+Retiring capacity = HYDRO - power capacity / HYDRO - POWER PLANT LIFE 
+	~	MW/Year
+	~		|
+
+Retiring NG CCGT capacity = NG CCGT capacity / NG CCGT LIFE 
+	~	MW/Year
+	~		|
+
+Retiring Solar PV capacity = SOLAR PV capacity / SOLAR PV LIFE 
+	~	MW/Year
+	~		|
+
+Retiring Trans capacity = Transmission wheeling capacity / TRANSM CAP LIFE 
+	~	MW/Year
+	~		|
+
+Sales = MARKET GROWTH RATE * total vehicle market + Discards 
+	~	Car/Year
+	~		|
+
+Sensitivity of Affordability = -2.45698
+	~	Dmnl
+	~		|
+
+Sensitivity of EV Charging stations = 0.1
+	~	Dmnl
+	~		|
+
+Sensitivity of HDI = 0.1037
+	~	Dmnl
+	~		|
+
+Sensitivity of ICV affordability = -0.0716
+	~	Dmnl
+	~		|
+
+Sensitivity of ICV emissions = -0.0158
+	~	Dmnl
+	~		|
+
+Sensitivity of ICV Range = 0.00011
+	~	Dmnl
+	~		|
+
+Sensitivity of ICV Sensitivity station coverage = 0.001
+	~	Dmnl
+	~		|
+
+Sensitivity of National Cultural Index = 0.0001
+	~	Dmnl
+	~		|
+
+Sensitivity of Range = 8
+	~	Dmnl
+	~		|
+
+Sensitivity to environmental impact = -0.0001
+	~	Dmnl
+	~		|
+
+Share of EV sales = EV Attractiveness / Total Attractiveness 
+	~	Dmnl
+	~		|
+
+Share of ICV Sales = ICV Attractiveness / Total Attractiveness 
+	~	Dmnl
+	~		|
+
+SOLAR PV capacity = INTEG( Developing solar PV capacity - Retiring Solar PV capacity 
+             , INITIAL SOLAR PV CAPACITY ) 
+	~	MW
+	~		|
+
+SOLAR PV Construction time = 1
+	~	
+	~		|
+
+SOLAR PV LIFE = 30
+	~	Year
+	~		|
+
+SPECIFIC FUEL = 0
+	~	USD/Mbtu
+	~		|
+
+STATION TO ICV RATION LIMIT = 0.0008329
+	~	Stations/Car
+	~		|
+
+Strength of Base cost learning curve = - LOG ( 1 - Base costs learning rate , 2) 
+	~	Dmnl
+	~		|
+
+Strength of Battery learning curve = - LOG ( BATTERY COST LR , 2) 
+	~	Dmnl
+	~		|
+
+Strength of EV Production Strength curve = - LOG ( 1 - EV Production costs learning rate
+                  , 2) 
+	~	Dmnl
+	~		|
+
+Strength of ICV Engine Production Strength curve = - LOG ( 1 - ICV Engine Production costs learning rate
+                  , 2) 
+	~	Dmnl
+	~		|
+
+"Strength of ICV R & D Learning curve" = - LOG ( 1 - "ICV R&D Learning rate" , 2) 
+	~	Dmnl
+	~		|
+
+"Strength of R & D Learning curve" = - LOG ( 1 - "R&D Learning rate" , 2) 
+	~	Dmnl
+	~		|
+
+TIME TO CHANGE CHARGER TO EV RATIO = 3
+	~	Year
+	~		|
+
+TIME TO CHANGE HDI = 30
+	~	Year
+	~		|
+
+TIME TO CHANGE REFUEL STATIONS TO ICV RATIO = 12
+	~	Year
+	~		|
+
+Time to Deploy Charging station = 1
+	~	Year
+	~		|
+
+Total Attractiveness = EV Attractiveness + ICV Attractiveness 
+	~	Dmnl
+	~		|
+
+Total Chargers = Available Charging stations + Charging stations under construction 
+	~	Stations
+	~		|
+
+Total emissions = ( EV emissions + ICV emissions ) / kg to Tons converter 
+	~	TCO2
+	~		|
+
+Total fuel demand = ( "Elect-BBL converter" * EV Electricity demand ) + ( Petrol Fuel Demand
+             * "Petrol Fuel-BBL Converter" ) 
+	~	BBL/Year
+	~		|
+
+Total Generation capacity = Bio - energy capacity + NG CCGT capacity + HYDRO - power capacity
+             + SOLAR PV capacity 
+	~	MW
+	~		|
+
+Total network effect = DIRECT CONTACT EFFECT * EV Market Share + INDIRECT CONTACT EFFECT
+             * EV Market Share + MARKETING EFFECTIVENESS 
+	~	Dmnl/Year
+	~		|
+
+Total Refuel stations = Available refuel stations + Refuel stations under construction
+             
+	~	Stations
+	~		|
+
+Total stations = Available Charging stations + Available refuel stations 
+	~	Stations
+	~		|
+
+Total Vehicle Discards = EV Discards + ICV Discards 
+	~	Car/Year
+	~		|
+
+total vehicle market = INTEG( Sales - Discards , INITIAL VEHICLE STOCK ) 
+	~	Car
+	~		|
+
+TRANSM CAP LIFE = 100
+	~	Year
+	~		|
+
+TRANSMISSION CAP BUILD TIME = 5
+	~	Year
+	~		|
+
+Transmission wheeling capacity = INTEG( Additional capacity - Retiring Trans capacity
+                  , INITIAL TRANSM CAP ) 
+	~	MW
+	~		|
+
+UNCERTAINTY AVOIDANCE = 0.5
+	~	Dmnl
+	~		|
+
+Unit Battery Cost = Battery Exp Factor * INITIAL UNIT BATTERY COST 
+	~	USD/kWh
+	~		|
+
+VAT = 0.25
+	~	Dmnl
+	~		|
+
+VEHICLE PURCHASE TAX = 0.45
+	~	Dmnl
+	~		|
+
+VOM = 0.001
+	~	USD/kWh
+	~		|
+
+********************************************************
+	.Control
+********************************************************~
+		Simulation Control Parameters
+	|
+
+FINAL TIME = 2050
+	~	Year
+	~	The final time for the simulation.
+	|
+
+INITIAL TIME = 2008
+	~	Year
+	~	The initial time for the simulation.
+	|
+
+SAVEPER = TIME STEP 
+	~	Year [0,?]
+	~	The frequency with which output is stored.
+	|
+
+TIME STEP = 0.125
+	~	Year [0,?]
+	~	The time step for the simulation.
+	|
+
+\\\---/// Sketch information - do not modify anything except names
+V301  Do not put anything below this section - it will be ignored
+*Vehicle market
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,110,0
+10,0,MARKET GROWTH RATE,-371,200,79,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,EV Stocks,702,121,43,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,497,123,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,132E67ADD21760F63DCFEA52AA1DEFD5F5F0EF41,6E5CD54FEB73ED7FC248241C764B4DBC2E377430,100,0,0,22,0,192,0,-1--1--1,,1|(546,123)|
+1,0,132E67ADD21760F63DCFEA52AA1DEFD5F5F0EF41,6276753F493E016A3FBAB94255B05C9DE2AAA3AF,4,0,0,22,0,192,0,-1--1--1,,1|(628,123)|
+11,0,0,591,123,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,EV New Sales,591,160,61,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,948,126,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,015F3851472B24F3E112C2D2562964D4BDDD48A6,6276753F493E016A3FBAB94255B05C9DE2AAA3AF,100,0,0,22,0,192,0,-1--1--1,,1|(788,126)|
+1,0,015F3851472B24F3E112C2D2562964D4BDDD48A6,91DD5BD38F3D0E3332E40531F83C483056D93C2E,4,0,0,22,0,192,0,-1--1--1,,1|(890,126)|
+11,0,0,837,126,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,EV Discards,837,163,54,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,6276753F493E016A3FBAB94255B05C9DE2AAA3AF,015F3851472B24F3E112C2D2562964D4BDDD48A6,1,0,0,0,0,192,0,-1--1--1,,1|(831,105)|
+10,0,EV LIFETIME,922,29,55,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,INITIAL EV STOCK,684,5,72,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,3E58BE760180455D2AB69165FCF4E07C30AE9859,6276753F493E016A3FBAB94255B05C9DE2AAA3AF,1,0,0,0,0,192,1,-1--1--1,,1|(701,52)|
+1,0,D817DE6FA1E2A13555829FE2C38EEF5D97959620,194836FC6DD749615E91AF9D10C1DFB413272564,1,0,0,0,0,192,0,-1--1--1,,1|(897,39)|
+10,0,Total Vehicle Discards,952,276,60,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,total vehicle market,0,284,86,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,INITIAL VEHICLE STOCK,3,411,80,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,4F63923AA300C2E3298D4D1512795949956C3974,1198A3B87E3A35FD81D2173E944F00DC87C3A6EC,1,0,0,0,0,192,1,-1--1--1,,1|(-8,409)|
+1,0,194836FC6DD749615E91AF9D10C1DFB413272564,3772923AC897FF35F08B278B518DB1C485724F26,1,0,0,0,0,192,0,-1--1--1,,1|(945,183)|
+10,0,ICV Stocks,722,511,46,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,517,513,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,095F9D0DB15951042E3D6F01655194E3FA36F2F9,08A6B7A0AB89815D22BA3BE7E34895274A87534A,100,0,0,22,0,192,0,-1--1--1,,1|(566,513)|
+1,0,095F9D0DB15951042E3D6F01655194E3FA36F2F9,9563837F218999127D6D6367AA2D4D5C058A1E6A,4,0,0,22,0,192,0,-1--1--1,,1|(646,513)|
+11,0,0,611,513,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,ICV New Sales,611,550,64,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,968,516,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,C100C23381130CCC94350C988CB569EA72F6A50A,9563837F218999127D6D6367AA2D4D5C058A1E6A,100,0,0,22,0,192,0,-1--1--1,,1|(809,516)|
+1,0,C100C23381130CCC94350C988CB569EA72F6A50A,C42418D92AC0C5E7D954AB8AABF98BBD6A4D6515,4,0,0,22,0,192,0,-1--1--1,,1|(910,516)|
+11,0,0,857,516,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,ICV Discards,857,534,60,10,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,9563837F218999127D6D6367AA2D4D5C058A1E6A,C100C23381130CCC94350C988CB569EA72F6A50A,1,0,0,0,0,192,0,-1--1--1,,1|(851,495)|
+10,0,ICV LIFETIME,942,628,58,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,INITIAL ICV STOCK,743,648,55,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,C65B98CF131EAE05A330A21C23EA00C1F2F596C8,9563837F218999127D6D6367AA2D4D5C058A1E6A,1,0,0,0,0,192,1,-1--1--1,,1|(724,604)|
+1,0,AD13394E094E743C76E1E097431CCAA22FCFDC24,3527B9194B9CD37D29D91EBD5BFEB146EDE57CC6,1,0,0,0,0,192,0,-1--1--1,,1|(936,610)|
+1,0,C100C23381130CCC94350C988CB569EA72F6A50A,3772923AC897FF35F08B278B518DB1C485724F26,1,0,0,0,0,192,0,-1--1--1,,1|(963,376)|
+10,0,Share of EV sales,436,19,63,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Share of ICV Sales,512,417,63,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,87C100E75E5A2AB5BF7C1394D5CDC66113157FE1,095F9D0DB15951042E3D6F01655194E3FA36F2F9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,8712CCD12AF685D83D9462EA3C06E33AE5A48CBF,132E67ADD21760F63DCFEA52AA1DEFD5F5F0EF41,1,0,0,0,0,192,0,-1--1--1,,1|(530,22)|
+12,0,48,270,284,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,DA3F4AD7D734620625A549C17060F43D37132039,1198A3B87E3A35FD81D2173E944F00DC87C3A6EC,100,0,0,22,0,192,0,-1--1--1,,1|(126,284)|
+1,0,DA3F4AD7D734620625A549C17060F43D37132039,64644F18EBBC470FCE1AA322D40BA9C00F39CD09,4,0,0,22,0,192,0,-1--1--1,,1|(219,284)|
+11,0,0,173,284,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,Discards,173,321,60,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Total Vehicle Discards,261,163,64,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,8610387B75A502DB26E8650931BA153D9287E283,DA3F4AD7D734620625A549C17060F43D37132039,1,0,0,0,0,192,0,-1--1--1,,1|(167,216)|
+12,0,48,-250,280,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,7832AF5306F275C481234F1C1E0F6CDEE6703E72,0D692296DED881BABBD78A4D9E9523C2B7159CD3,100,0,0,22,0,192,0,-1--1--1,,1|(-204,280)|
+1,0,7832AF5306F275C481234F1C1E0F6CDEE6703E72,1198A3B87E3A35FD81D2173E944F00DC87C3A6EC,4,0,0,22,0,192,0,-1--1--1,,1|(-121,280)|
+11,0,0,-163,280,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,Sales,-163,317,45,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,DA3F4AD7D734620625A549C17060F43D37132039,7832AF5306F275C481234F1C1E0F6CDEE6703E72,1,0,0,0,0,192,0,-1--1--1,,1|(-92,194)|
+1,0,1198A3B87E3A35FD81D2173E944F00DC87C3A6EC,7832AF5306F275C481234F1C1E0F6CDEE6703E72,1,0,0,0,0,192,0,-1--1--1,,1|(-84,218)|
+10,0,Sales,587,279,47,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,5AF2F6A6766B424488A6D717C5492D5BCC092D6D,2AE4552211DD5A17648E2C05FBB444C33BBF7177,1,0,0,0,0,192,0,-1--1--1,,1|(674,366)|
+1,0,5AF2F6A6766B424488A6D717C5492D5BCC092D6D,132E67ADD21760F63DCFEA52AA1DEFD5F5F0EF41,1,0,0,0,0,192,0,-1--1--1,,1|(505,195)|
+1,0,DE11E8E1E57C1E55B9112EAC4CE5AF70A374E6AF,7832AF5306F275C481234F1C1E0F6CDEE6703E72,1,0,0,0,0,192,0,-1--1--1,,1|(-225,208)|
+\\\---/// Sketch information - do not modify anything except names
+V301  Do not put anything below this section - it will be ignored
+*Consumer familiarity model
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,0
+12,0,48,500,113,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,14D1322E1D61AB921D6559341AB0C55439871678,CEB19D4C51837DE6CDC0A5A326994CE35D0E8B3E,100,0,0,22,0,192,0,-1--1--1,,1|(555,113)|
+11,0,0,607,113,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,Network effect gain,607,150,65,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,957,113,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,AEDF7CAF2E16DCB1A18FD262AB4BA32804E7A459,4A980186C6508F134FB9169D775A451E8CF45BCD,4,0,0,22,0,192,0,-1--1--1,,1|(922,113)|
+11,0,0,892,113,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,Network effect loss,892,150,65,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,MARKETING EFFECTIVENESS,433,388,70,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,DIRECT CONTACT EFFECT,598,393,79,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,INDIRECT CONTACT EFFECT,763,393,79,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,FORGETTING RATE,1020,-13,59,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,EFA7238B6529AEB408405CE45FDE96CCCB934909,AEDF7CAF2E16DCB1A18FD262AB4BA32804E7A459,1,0,0,0,0,192,0,-1--1--1,,1|(910,33)|
+10,0,Total network effect,572,281,63,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,REFERENCE SOCIAL EXPOSURE,1011,461,84,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,epsilon,967,344,42,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Effect of social exposure on forgetfulness,1008,261,65,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,25CFF573ECDCDE594264657CAD5B700226C878C7,A5E85FA636DCF7953F32EEBFEAEA7D725D2FF051,1,0,0,0,0,192,0,-1--1--1,,1|(439,334)|
+1,0,FE55B910A246801B35184ECFBD6AF233402581BE,A5E85FA636DCF7953F32EEBFEAEA7D725D2FF051,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,F3B8D0E27E6C31B3753F9D3E85ED19A385E0BAEB,A5E85FA636DCF7953F32EEBFEAEA7D725D2FF051,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,A5E85FA636DCF7953F32EEBFEAEA7D725D2FF051,B15DDF04377AFA80ED47373EE480134E8425D98C,1,0,0,0,0,192,0,-1--1--1,,1|(545,219)|
+1,0,A5E85FA636DCF7953F32EEBFEAEA7D725D2FF051,3992C0BD3873FC7953A4D109F49D06C2CDC2D6C3,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,6C1EC8A7577CA55940F73DFBB092C69EAB69BD2B,3992C0BD3873FC7953A4D109F49D06C2CDC2D6C3,1,0,0,0,0,192,0,-1--1--1,,1|(945,334)|
+1,0,A26D2D93CDB996843D59725BF6A537CA196FA9B3,6C1EC8A7577CA55940F73DFBB092C69EAB69BD2B,1,0,0,0,0,192,0,-1--1--1,,1|(936,408)|
+1,0,A26D2D93CDB996843D59725BF6A537CA196FA9B3,3992C0BD3873FC7953A4D109F49D06C2CDC2D6C3,1,0,0,0,0,192,0,-1--1--1,,1|(1091,372)|
+1,0,3992C0BD3873FC7953A4D109F49D06C2CDC2D6C3,AEDF7CAF2E16DCB1A18FD262AB4BA32804E7A459,1,0,0,0,0,192,0,-1--1--1,,1|(987,169)|
+10,0,INITIAL NETWORK EFFECT,727,-27,80,31,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV Network effect,1546,106,42,29,3,3,0,0,-1,1,0,0,0,0,0,0,0,0
+12,0,48,1300,103,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,4FD6BBA0FEBAA06CA909F5B6E027B0492129A563,CF61C4911AB4C977F7160F36E40B29F8284CFE99,100,0,0,22,0,192,0,-1--1--1,,1|(1355,103)|
+1,0,4FD6BBA0FEBAA06CA909F5B6E027B0492129A563,627060094F29A1C3006756DEBDC59DC1E9217C61,4,0,0,22,0,192,0,-1--1--1,,1|(1458,103)|
+11,0,0,1407,103,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,ICV Network effect gain,1407,129,46,18,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,1757,103,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,2D957E6C037884356B1EA0225544BB4B1038E969,627060094F29A1C3006756DEBDC59DC1E9217C61,100,0,0,22,0,192,0,-1--1--1,,1|(1637,103)|
+1,0,2D957E6C037884356B1EA0225544BB4B1038E969,156042D8AB7CF6A9A208C5A1926A4DFEFED9A7B9,4,0,0,22,0,192,0,-1--1--1,,1|(1722,103)|
+11,0,0,1692,103,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,ICV Network effect loss,1692,129,46,18,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV MARKETING EFFECTIVENESS,1233,378,70,18,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV DIRECT CONTACT EFFECT,1398,383,75,18,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV INDIRECT CONTACT EFFECT,1563,383,75,18,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV FORGETTING RATE,1820,-23,69,18,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,DA5C66725F49E6A74AA24B7AEC349656921F82BB,2D957E6C037884356B1EA0225544BB4B1038E969,1,0,0,0,0,192,0,-1--1--1,,1|(1710,23)|
+1,0,627060094F29A1C3006756DEBDC59DC1E9217C61,B6304D6C588F4AD25B90A5C1691F354078CF279F,1,0,0,0,0,192,0,-1--1--1,,1|(1582,57)|
+1,0,627060094F29A1C3006756DEBDC59DC1E9217C61,4FD6BBA0FEBAA06CA909F5B6E027B0492129A563,1,0,0,0,0,192,0,-1--1--1,,1|(1445,34)|
+10,0,ICV REFERENCE SOCIAL EXPOSURE,1811,451,80,18,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV epsilon,1767,334,42,10,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV Effect of social exposure on forgetfulness,1808,251,70,27,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,72C58221A0C8157446BA88EF2C97EAA2A751C8CF,EA4A0477B9D39137FFB5B835E0E3B97041A02D6D,1,0,0,0,0,192,0,-1--1--1,,1|(1745,324)|
+1,0,887CC4A79B89E6BD1E38AD0642CAF0F9B3AC7550,72C58221A0C8157446BA88EF2C97EAA2A751C8CF,1,0,0,0,0,192,0,-1--1--1,,1|(1736,398)|
+1,0,887CC4A79B89E6BD1E38AD0642CAF0F9B3AC7550,EA4A0477B9D39137FFB5B835E0E3B97041A02D6D,1,0,0,0,0,192,0,-1--1--1,,1|(1891,362)|
+1,0,EA4A0477B9D39137FFB5B835E0E3B97041A02D6D,2D957E6C037884356B1EA0225544BB4B1038E969,1,0,0,0,0,192,0,-1--1--1,,1|(1787,159)|
+10,0,ICV INITIAL NETWORK EFFECT,1527,-37,43,27,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,02FE88A2B1062EC1BFC37153818131FED51B4733,627060094F29A1C3006756DEBDC59DC1E9217C61,1,0,0,0,0,192,1,-1--1--1,,1|(1542,43)|
+10,0,EV Network effect,743,114,53,29,3,3,0,0,-1,1,0,0,0,0,0,0,0,0
+1,0,14D1322E1D61AB921D6559341AB0C55439871678,426E45D7A46E8120EB29DDD11D8BA5D00E0FFEBB,4,0,0,22,0,192,0,-1--1--1,,1|(651,113)|
+1,0,AEDF7CAF2E16DCB1A18FD262AB4BA32804E7A459,426E45D7A46E8120EB29DDD11D8BA5D00E0FFEBB,36,0,0,22,0,192,0,-1--1--1,,1|(841,113)|
+1,0,426E45D7A46E8120EB29DDD11D8BA5D00E0FFEBB,B15DDF04377AFA80ED47373EE480134E8425D98C,1,0,0,0,0,192,0,-1--1--1,,1|(691,189)|
+1,0,426E45D7A46E8120EB29DDD11D8BA5D00E0FFEBB,ABC1E266A88270412BF12B7BF1A202D7BC7CC897,1,0,0,0,0,192,0,-1--1--1,,1|(795,196)|
+1,0,114E83BA04D49AE3EA11428869E977716035DD0E,426E45D7A46E8120EB29DDD11D8BA5D00E0FFEBB,1,0,0,0,0,192,1,-1--1--1,,1|(723,30)|
+10,0,EV Market Share,493,494,66,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,31EB57E316D56C4F2ABF314A17379786BD9549AF,A5E85FA636DCF7953F32EEBFEAEA7D725D2FF051,1,0,0,0,0,192,0,-1--1--1,,1|(516,364)|
+10,0,EV Market Share,1372,307,44,18,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,ICV Market share,1375,465,66,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,ICV Total network effect,1386,267,80,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,D68BB38D013F1222EBD301AE41D7638EDB931C82,F95869B9C97BBDC809FD2BD2931FAD66FD71425D,1,0,0,0,0,192,0,-1--1--1,,1|(1211,319)|
+1,0,F95869B9C97BBDC809FD2BD2931FAD66FD71425D,10BF4408CCCAFA475B998A16D7B6E5CF7F6B2677,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,B70173F542A0847BFDBFFB5EBFBD902E3B5B35F3,F95869B9C97BBDC809FD2BD2931FAD66FD71425D,1,0,0,0,0,192,0,-1--1--1,,1|(1285,337)|
+1,0,DA557656B106FF138BF6C7A807EB4D2DD2FBC960,F95869B9C97BBDC809FD2BD2931FAD66FD71425D,1,0,0,0,0,192,0,-1--1--1,,1|(1357,347)|
+1,0,209ECB1305BBF5E5906A45C1E251ED3764DF82A8,F95869B9C97BBDC809FD2BD2931FAD66FD71425D,1,0,0,0,0,192,0,-1--1--1,,1|(1503,298)|
+1,0,F95869B9C97BBDC809FD2BD2931FAD66FD71425D,EA4A0477B9D39137FFB5B835E0E3B97041A02D6D,1,0,0,0,0,192,0,-1--1--1,,1|(1595,230)|
+10,0,Time,203,278,35,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,3F73309DE90FAE5301E75ACDED339A9571C840C7,25CFF573ECDCDE594264657CAD5B700226C878C7,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,EV MARKET ADJUST FACTOR,203,463,87,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,C0DE86432972C3D2FD9F1D8E78326EA6317E3CF0,25CFF573ECDCDE594264657CAD5B700226C878C7,1,0,0,0,0,192,0,-1--1--1,,1|(346,477)|
+10,0,"1 Yr",270,233,59,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,D70D95811B8519E10765014C72BFA998D89E764F,25CFF573ECDCDE594264657CAD5B700226C878C7,1,0,0,0,0,192,0,-1--1--1,,1|(329,299)|
+10,0,"MARKETING POLICY ADJUST. DATE",161,378,72,36,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,A20810096AECE1A0167156A45433B0CB32B9297F,25CFF573ECDCDE594264657CAD5B700226C878C7,1,0,0,0,0,192,0,-1--1--1,,1|(286,394)|
+\\\---/// Sketch information - do not modify anything except names
+V301  Do not put anything below this section - it will be ignored
+*Vehicle choice model
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|255-255-255|96,96,88,0
+10,0,EV Utility,17,156,42,22,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,EV Attractiveness,211,92,60,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,4B73A03DD09583F7D1C3AEFCAFA8BF2563C9E1EE,4FD750D24E3C5C1F0531AA3340F75F851372F42D,1,0,0,0,0,192,0,-1--1--1,,1|(167,179)|
+10,0,EV Affordability Utility,-419,27,58,21,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,EV Relative Range Index,-431,179,57,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,EV Fuel Cost,-280,491,61,51,8,3,0,2,-1,0,0,0,0-0-0,0-0-0,|||255-0-0,0,0,0,0,0,0
+10,0,EV Maintenance cost,-186,683,81,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,"EV O&M cost Sensitivity",-26,628,86,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,6974F3CDED39CE235605E7DF144BD9410DB2400D,D3E13B19B9ABC1AB43B13CDAE8CCDA96BFF4E6D0,1,0,0,0,0,192,0,-1--1--1,,1|(-372,60)|
+10,0,Reference Desirable Range,-661,212,75,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,2EDA2B958B290B1549DF8E26DAF98DFCC090D624,7C739153EBB4A8088AEF4BE5BC40A6A35CE30C2B,1,0,0,0,0,192,0,-1--1--1,,1|(-564,182)|
+10,0,Gross Domestic Product per capita,-633,-82,77,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Time,-399,582,35,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,5F7A6AE1B62E1FE9383B784B58E26A0C1E6BD72F,81B83D3CA3CDCD78EDFA5B0C6BA4FC2C52E6A77F,1,0,0,0,0,192,0,-1--1--1,,1|(-343,547)|
+10,0,ICV Utility,118,1136,49,10,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV Attractiveness,312,1072,60,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,2EC30572723535881EE31F9AEE138888918E826D,C274A6F7116E973E00A9B831865C69231BDC378E,1,0,0,0,0,192,0,-1--1--1,,1|(268,1159)|
+10,0,ICV Affordability Utility,-240,1030,84,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Sensitivity of ICV affordability,-327,910,80,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV Relative Range Index,-293,1179,84,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Sensitivity of ICV Range,-296,1098,80,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV Fuel Cost,-287,1414,59,29,8,3,0,2,-1,0,0,0,0-0-0,0-0-0,|||255-0-0,0,0,0,0,0,0
+10,0,ICV Maintenance cost,-127,1499,84,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,"ICV O&M Sensitivity",57,1502,86,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Time,-506,1404,29,10,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,3A87E351D4C955F42D3E7D2F14F759677FBF1C7B,72401D68AF3202523C089D9C223D8B67D186406B,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,Reference Desirable Range,-509,1236,50,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,7F7CC68350CDD50F5B7E70BA4C3F254E84C05E1C,8C1234E8A20317E3F02E124A5E5FD880382933E7,1,0,0,0,0,192,0,-1--1--1,,1|(-390,1210)|
+10,0,ICV Network effect,90,951,62,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,21C41E6C1020311F6F75136FAEF79F50491096FF,C274A6F7116E973E00A9B831865C69231BDC378E,1,0,0,0,0,192,0,-1--1--1,,1|(250,985)|
+10,0,EV Network effect,68,-30,65,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,BA62CBFE1B005EAF0C4D159186D508F4D5FE96E9,4FD750D24E3C5C1F0531AA3340F75F851372F42D,1,0,0,0,0,192,0,-1--1--1,,1|(209,46)|
+10,0,Sensitivity of ICV Sensitivity station coverage,-228,1337,124,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Reference EV CHARGING STATION COVERAGE,-510,282,111,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Total Attractiveness,538,447,85,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Share of EV sales,573,157,77,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Share of ICV Sales,659,711,81,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,C274A6F7116E973E00A9B831865C69231BDC378E,A1D9E5441D13CB56A0495BEA6A9448210496B6AF,1,0,0,0,0,192,0,-1--1--1,,1|(354,619)|
+1,0,A1D9E5441D13CB56A0495BEA6A9448210496B6AF,72352DF4A5637BB5A1D46F3113A1F55408F1503C,1,0,0,0,0,192,0,-1--1--1,,1|(629,564)|
+1,0,C274A6F7116E973E00A9B831865C69231BDC378E,72352DF4A5637BB5A1D46F3113A1F55408F1503C,1,0,0,0,0,192,0,-1--1--1,,1|(616,921)|
+1,0,4FD750D24E3C5C1F0531AA3340F75F851372F42D,A1D9E5441D13CB56A0495BEA6A9448210496B6AF,1,0,0,0,0,192,0,-1--1--1,,1|(278,306)|
+1,0,A1D9E5441D13CB56A0495BEA6A9448210496B6AF,3BBFCDA1FC276D40FC62AE88359E142A04CD0CA4,1,0,0,0,0,192,0,-1--1--1,,1|(636,307)|
+1,0,4FD750D24E3C5C1F0531AA3340F75F851372F42D,3BBFCDA1FC276D40FC62AE88359E142A04CD0CA4,1,0,0,0,0,192,0,-1--1--1,,1|(433,35)|
+10,0,Charging station coverage,-727,330,81,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Refuel stations coverage,-495,1309,80,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Sensitivity of National Cultural Index,96,486,79,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,0,1160,248,399,233,8,15,0,0,2,0,0,0,0,0,0,0,0,0
+Share of EV sales,Graph
+10,0,"1 dollar",-499,-156,56,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,PFAD INDEX,255,412,66,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,LN GDP,-482,-67,56,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,EB9F0EDE47B757D685CBE18CC82696985563CFB0,6974F3CDED39CE235605E7DF144BD9410DB2400D,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,8701EFFE1A0CD7EFC6D72F3AE4123335725DE6C5,EB9F0EDE47B757D685CBE18CC82696985563CFB0,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,A1798F098D23C52F3C33C31B9976864F67FFC86A,EB9F0EDE47B757D685CBE18CC82696985563CFB0,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,LN GDP,-482,975,47,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,8C5E090B12EFB58B7FBC5D9FAE6E05DD321A06E6,93CD818A0A6D5A09F51B6B70409549D96089B5E2,1,0,0,0,0,192,0,-1--1--1,,1|(-377,989)|
+10,0,Human Development Index,-240,-268,65,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Sensitivity of HDI,-104,-300,68,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Constant,349,1426,51,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,AB085F42BCCFB6E7E8192A5F28F97B584EB4388B,2EC30572723535881EE31F9AEE138888918E826D,1,0,0,0,0,192,0,-1--1--1,,1|(272,1356)|
+10,0,Effect of EV Affordability,-208,62,57,42,8,3,0,2,-1,0,0,0,0-0-0,0-0-0,|||128-0-255,0,0,0,0,0,0
+10,0,Effect of EV Range,-239,180,69,29,8,3,0,2,-1,0,0,0,0-0-0,0-0-0,|||128-0-255,0,0,0,0,0,0
+10,0,Effect of EV station Coverage,-176,243,82,29,8,3,0,2,-1,0,0,0,0-0-0,0-0-0,|||128-0-255,0,0,0,0,0,0
+10,0,Sensitivity of Affordability,-303,-169,58,41,8,3,0,2,-1,0,0,0,0-0-0,0-0-0,|||0-255-128,0,0,0,0,0,0
+10,0,Reference Affordability,-342,-89,54,41,8,3,0,2,-1,1,0,0,0-0-0,0-0-0,|||255-0-0,0,0,0,0,0,0
+1,0,085A8885341B7AE6FD3F5E389BCACEB294F2A60C,D3E13B19B9ABC1AB43B13CDAE8CCDA96BFF4E6D0,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,F8EEF473008B148945BAF34B1332CEAAE2E69118,D3E13B19B9ABC1AB43B13CDAE8CCDA96BFF4E6D0,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,D3E13B19B9ABC1AB43B13CDAE8CCDA96BFF4E6D0,4B73A03DD09583F7D1C3AEFCAFA8BF2563C9E1EE,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,Sensitivity of Range,-497,107,82,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,4FE186097461899F84A4B0E800521801AEA1A770,4B73A03DD09583F7D1C3AEFCAFA8BF2563C9E1EE,1,0,0,0,0,192,0,-1--1--1,,1|(-140,148)|
+1,0,7C739153EBB4A8088AEF4BE5BC40A6A35CE30C2B,4FE186097461899F84A4B0E800521801AEA1A770,1,0,0,0,0,192,0,-1--1--1,,1|(-353,186)|
+1,0,DA99E333C39521C0680A248A05BCEADFB34945F8,4FE186097461899F84A4B0E800521801AEA1A770,1,0,0,0,0,192,0,-1--1--1,,1|(-324,118)|
+1,0,5E20638FEAFFE8C64F6CA810A4A9CBC71EC421F9,3E41CC4BF40F5BA48A0191BBE7B7335A82B4015C,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,3E41CC4BF40F5BA48A0191BBE7B7335A82B4015C,4B73A03DD09583F7D1C3AEFCAFA8BF2563C9E1EE,1,0,0,0,0,192,0,-1--1--1,,1|(-100,206)|
+10,0,Sensitivity of EV Charging stations,-552,388,79,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,62FAA8435EFCEBF37A9DF481E1C0278FD24D5D4F,3E41CC4BF40F5BA48A0191BBE7B7335A82B4015C,1,0,0,0,0,192,0,-1--1--1,,1|(-290,323)|
+10,0,effect of ICV affordability,-75,1028,76,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Reference Affordability,-86,907,62,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,F41D813D252F497177E995965688FCE2EED2E030,B48DDA0C8954D9841F9CFBDD1ACACE0DC40D8580,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,333D82BA86E73BB22BE3303E09B1B1FB2A051E3C,B48DDA0C8954D9841F9CFBDD1ACACE0DC40D8580,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,B48DDA0C8954D9841F9CFBDD1ACACE0DC40D8580,2EC30572723535881EE31F9AEE138888918E826D,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,93CD818A0A6D5A09F51B6B70409549D96089B5E2,B48DDA0C8954D9841F9CFBDD1ACACE0DC40D8580,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,Effect of Range,-56,1149,68,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,12F25CA26C2E7531A0D70B9C09677F7A74072494,134827474CEE97F02998A5F73EB09A5CE78DBBB1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,8C1234E8A20317E3F02E124A5E5FD880382933E7,134827474CEE97F02998A5F73EB09A5CE78DBBB1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,134827474CEE97F02998A5F73EB09A5CE78DBBB1,2EC30572723535881EE31F9AEE138888918E826D,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,Effect of Charging station coverage,-58,1224,80,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,5FA17EE5F77ACEF089CA4C08B38A1C9985036EA6,93EF6236813E88C2289901ED0DC87FA86A4E818E,1,0,0,0,0,192,0,-1--1--1,,1|(-70,1262)|
+1,0,93EF6236813E88C2289901ED0DC87FA86A4E818E,2EC30572723535881EE31F9AEE138888918E826D,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,Reference EV CHARGING STATION COVERAGE,-297,1263,91,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,5D973703E073E3422CC0F3B1F8BF71F7F6771EAB,93EF6236813E88C2289901ED0DC87FA86A4E818E,1,0,0,0,0,192,0,-1--1--1,,1|(-204,1280)|
+1,0,468CCC8F727FD6AAF3E68FD82BD6383B1EED073D,93EF6236813E88C2289901ED0DC87FA86A4E818E,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,345E1B66999CE2213D550C26E8AC69161CE364F0,3E41CC4BF40F5BA48A0191BBE7B7335A82B4015C,1,0,0,0,0,192,0,-1--1--1,,1|(-331,303)|
+10,0,Ref HDI Index,22,-288,63,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Effect of HDI on EV adoption,-123,-60,77,42,8,3,0,2,-1,0,0,0,0-0-0,0-0-0,|||128-0-255,0,0,0,0,0,0
+1,0,D9198C266478C3805C78FA07D8F062D564C0B95F,58932F4A0C62E82F619C50999C8428DC4B083B0E,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,904A2990C289840B230672130462591F944E4D1E,58932F4A0C62E82F619C50999C8428DC4B083B0E,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,4F2B60F81C999DEA6DC411DFAE6EF27F7B519A3A,58932F4A0C62E82F619C50999C8428DC4B083B0E,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,58932F4A0C62E82F619C50999C8428DC4B083B0E,4B73A03DD09583F7D1C3AEFCAFA8BF2563C9E1EE,1,0,0,0,0,192,0,-1--1--1,,1|(-33,42)|
+10,0,Effect of Culture,146,308,74,29,8,3,0,2,-1,0,0,0,0-0-0,0-0-0,|||128-0-255,0,0,0,0,0,0
+10,0,reference of culture effect,135,583,81,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,F641DD41F93DF12B8416A7D0E0898603684AFA17,AEFA72E81D46187633BC6AC598CE7A2492876C34,1,0,0,0,0,192,0,-1--1--1,,1|(95,406)|
+1,0,EBC63B839F99DF0B1990B770297082B96769C2CA,AEFA72E81D46187633BC6AC598CE7A2492876C34,1,0,0,0,0,192,0,-1--1--1,,1|(244,325)|
+1,0,FD602EC1A39F753628DDABDA9B8C411A86268D2C,AEFA72E81D46187633BC6AC598CE7A2492876C34,1,0,0,0,0,192,0,-1--1--1,,1|(179,459)|
+1,0,AEFA72E81D46187633BC6AC598CE7A2492876C34,4B73A03DD09583F7D1C3AEFCAFA8BF2563C9E1EE,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,Effect of EV O M cost,-39,354,81,42,8,3,0,2,-1,0,0,0,0-0-0,0-0-0,|||128-0-255,0,0,0,0,0,0
+1,0,8B08B7037D37784E0A348CAE049EA8B35E0DB3F9,4B73A03DD09583F7D1C3AEFCAFA8BF2563C9E1EE,1,0,0,0,0,192,0,-1--1--1,,1|(-5,290)|
+1,0,ADE5740E3501B81B7AA07830397E0BF9C08956FB,8B08B7037D37784E0A348CAE049EA8B35E0DB3F9,1,0,0,0,0,192,0,-1--1--1,,1|(-143,485)|
+1,0,57E052E8CB120D186A8C352C262ABF9720D76A39,8B08B7037D37784E0A348CAE049EA8B35E0DB3F9,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,"Effect of ICV O & M cost",76,1320,81,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,8245AD4F617284FCD86C41550607F4E6E0F66540,2EC30572723535881EE31F9AEE138888918E826D,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,B2F08140E9AB4402CA1B508F95ADD257F1041F14,8245AD4F617284FCD86C41550607F4E6E0F66540,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,FDB0FDAECDA433BAC1F3F91E672B86E11BC60ACC,8245AD4F617284FCD86C41550607F4E6E0F66540,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,EV environmental Impact,-213,351,85,29,8,3,0,2,-1,0,0,0,0-0-0,0-0-0,|||128-0-255,0,0,0,0,0,0
+10,0,Average Annual emissions limit,-811,503,78,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Emissions target,-1037,447,76,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,AVKT,-1091,527,72,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Average Emissions per EV,-611,593,83,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,4FA497F6E3644134F4D6DD49DE5C877E79D8BE9E,7225B9E12D4ADEB481F9C25C79C12FD3BA149F23,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,D32432008DE0EB17E8A339409172BC88E974CB9C,7225B9E12D4ADEB481F9C25C79C12FD3BA149F23,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,48CB40715D428AE574FB6F2358A2217224AF3CDE,E0FA2C0C34FEDA2E60F666D677B5499EA8506DA1,1,0,0,0,0,192,0,-1--1--1,,1|(-425,526)|
+1,0,7225B9E12D4ADEB481F9C25C79C12FD3BA149F23,E0FA2C0C34FEDA2E60F666D677B5499EA8506DA1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,Sensitivity to environmental impact,-797,591,85,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,FD6AC7C059FB9908A6E1EE37F2CA78850B08015C,E0FA2C0C34FEDA2E60F666D677B5499EA8506DA1,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,E0FA2C0C34FEDA2E60F666D677B5499EA8506DA1,4B73A03DD09583F7D1C3AEFCAFA8BF2563C9E1EE,1,0,0,0,0,192,0,-1--1--1,,1|(-11,221)|
+10,0,Average ICV emissions,77,1617,85,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Average Annual emissions limit,279,1592,78,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Sensitivity of ICV emissions,396,1510,79,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Effect of ICV emissions,201,1437,66,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,D79A4A6E1684D7EA03E6761F26EB07437FD85565,2EC30572723535881EE31F9AEE138888918E826D,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,1B4CDA09F00875791B7DCA76FB8132C646F76BF0,D79A4A6E1684D7EA03E6761F26EB07437FD85565,1,0,0,0,0,192,0,-1--1--1,,1|(154,1528)|
+1,0,E41D498748607911D83B0F4F40F28AD5997CF267,D79A4A6E1684D7EA03E6761F26EB07437FD85565,1,0,0,0,0,192,0,-1--1--1,,1|(228,1507)|
+1,0,E8C4F0AAAE9208EFA0B49F9B6486DFC387841C06,D79A4A6E1684D7EA03E6761F26EB07437FD85565,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,EV Range,-725,133,54,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,777016FB30289F2418F0325E93551F46F17AED14,7C739153EBB4A8088AEF4BE5BC40A6A35CE30C2B,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,ICV Range,-540,1150,57,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,5AC03A05F1CDA3E6A628E719DF7E7CF9F0D80D8B,8C1234E8A20317E3F02E124A5E5FD880382933E7,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,Effective EV FE,-460,661,64,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,81B83D3CA3CDCD78EDFA5B0C6BA4FC2C52E6A77F,8B08B7037D37784E0A348CAE049EA8B35E0DB3F9,1,0,0,0,0,192,0,-1--1--1,,1|(-199,432)|
+1,0,3F935748D202CDD7651E629D5CA4EA8190CDF30D,8B08B7037D37784E0A348CAE049EA8B35E0DB3F9,1,0,0,0,0,192,0,-1--1--1,,1|(-235,549)|
+10,0,effective ICV FE,-413,1495,61,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,B4BA603427261F0098C4312260805FB6A2857BC9,8245AD4F617284FCD86C41550607F4E6E0F66540,1,0,0,0,0,192,0,-1--1--1,,1|(-198,1446)|
+1,0,72401D68AF3202523C089D9C223D8B67D186406B,8245AD4F617284FCD86C41550607F4E6E0F66540,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,"EV Price + tax",-771,7,51,29,8,2,0,3,-1,1,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,2980B7F2DDB1FD6E5EC40A41A25CA46CB95A2305,6974F3CDED39CE235605E7DF144BD9410DB2400D,1,0,0,0,0,192,0,-1--1--1,,1|(-614,26)|
+10,0,"ICV Price + Tax",-576,1062,54,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,91A019F2C5B1C5A8476AB90CFF0CEA56E4673CE1,93CD818A0A6D5A09F51B6B70409549D96089B5E2,1,0,0,0,0,192,0,-1--1--1,,1|(-408,1065)|
+10,0,one thousand dollars,-630,-24,69,26,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,E4084B6B97390259E6E410B00DC55C28272300DD,6974F3CDED39CE235605E7DF144BD9410DB2400D,1,0,0,0,0,192,0,-1--1--1,,1|(-476,-15)|
+10,0,one thousand dollars,-507,1015,61,26,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,49B012A84B8A2A1E38DBE07666C638008ABA94D2,93CD818A0A6D5A09F51B6B70409549D96089B5E2,1,0,0,0,0,192,0,-1--1--1,,1|(-409,1037)|
+10,0,"1 Yr",-983,389,48,16,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,1E516882F4B4E371FBDD902BEE7E40AB74564A9E,7225B9E12D4ADEB481F9C25C79C12FD3BA149F23,1,0,0,0,0,192,0,-1--1--1,,1|(-881,417)|
+\\\---/// Sketch information - do not modify anything except names
+V301  Do not put anything below this section - it will be ignored
+*GDP
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,0
+10,0,Gross Domestic Product per capita,850,221,85,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,635,222,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,9BF61A99DD18E94A484CB3FAE4A59E166B198BBC,1696069044C84A4F38052E4F9830DD2DE31D911A,100,0,0,22,0,192,0,-1--1--1,,1|(682,222)|
+1,0,9BF61A99DD18E94A484CB3FAE4A59E166B198BBC,725624025ECAD3CE9BFD145273E84922850A5A0F,4,0,0,22,0,192,0,-1--1--1,,1|(748,222)|
+11,0,0,726,222,6,8,34,3,0,0,1,0,0,0,0,0,0,16777216,0,0
+10,0,Change in GDP,726,259,47,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,INITIAL GROSS DOMESTIC PRODUCT per capita,1031,298,95,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,725624025ECAD3CE9BFD145273E84922850A5A0F,9BF61A99DD18E94A484CB3FAE4A59E166B198BBC,1,0,0,0,0,192,0,-1--1--1,,1|(781,157)|
+1,0,48FB4F7D34DC3D7B061B789CAACD8EBD8C4EBAF1,725624025ECAD3CE9BFD145273E84922850A5A0F,1,0,0,0,0,192,1,-1--1--1,,1|(957,233)|
+10,0,Time,444,137,35,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,GDP PER CAPITA GROWTH RATE,564,309,74,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,841D13B033D7BB042A14EF0F56788A8607B81583,3FDB21322D238680735439013B8718B61AFA6A95,1,0,0,0,0,192,0,-1--1--1,,1|(438,260)|
+1,0,3FDB21322D238680735439013B8718B61AFA6A95,EE87344D30067C7B35654AAB2A5573F20D5D4B2A,1,0,0,0,0,192,0,-1--1--1,,1|(638,261)|
+\\\---/// Sketch information - do not modify anything except names
+V301  Do not put anything below this section - it will be ignored
+*Refuelling Infrasturcture 
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,74,0
+10,0,Available Charging stations,1550,-139,85,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,1834,-139,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,23E68227432C189043F1E0451E0F0B8D3A9D2158,CE817E61D2C6C613D0195D900EBCC25C4A998284,100,0,0,22,0,192,0,-1--1--1,,1|(1678,-139)|
+1,0,23E68227432C189043F1E0451E0F0B8D3A9D2158,9DCAA3EA18CF580B4732E1466AEEB125F42E056B,4,0,0,22,0,192,0,-1--1--1,,1|(1779,-139)|
+11,0,0,1728,-139,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,Charging stations scrappage,1728,-89,80,42,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,"INITIAL NO. OF CHARGING STATIONS",1533,-321,72,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,5E59F5D8A8C4FCE2E772CA27F8E2E2918258FCAB,CE817E61D2C6C613D0195D900EBCC25C4A998284,1,0,0,0,0,192,1,-1--1--1,,1|(1499,-233)|
+10,0,Time to Deploy Charging station,1377,-271,75,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Charging stations under construction,1224,-134,88,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,14805BC52D761C317DE020D11E85ADCFFD5C4263,2144FCB3C6595508B6B3408E86A612FCE7DDE18C,100,0,0,22,0,192,0,-1--1--1,,1|(1348,-137)|
+1,0,14805BC52D761C317DE020D11E85ADCFFD5C4263,CE817E61D2C6C613D0195D900EBCC25C4A998284,4,0,0,22,0,192,0,-1--1--1,,1|(1430,-137)|
+11,0,0,1390,-137,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,Charging stations deployed,1390,-100,80,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,967,-139,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,D990FFD735EADA824CE597CC90514867A4A628DC,E0D885F9D16230D3CFB6F4E37AFD9F64A21E52E8,100,0,0,22,0,192,0,-1--1--1,,1|(1013,-139)|
+1,0,D990FFD735EADA824CE597CC90514867A4A628DC,2144FCB3C6595508B6B3408E86A612FCE7DDE18C,4,0,0,22,0,192,0,-1--1--1,,1|(1099,-139)|
+1,0,A1894C3171087013D26C09901EBEC9F4BEDBA744,14805BC52D761C317DE020D11E85ADCFFD5C4263,1,0,0,0,0,192,0,-1--1--1,,1|(1391,-210)|
+10,0,CHARGING STATION LIFESPAN,1771,-271,84,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,13505DDBDFDE1F135A2F5DE0139F2798030E144D,23E68227432C189043F1E0451E0F0B8D3A9D2158,1,0,0,0,0,192,0,-1--1--1,,1|(1702,-212)|
+1,0,2144FCB3C6595508B6B3408E86A612FCE7DDE18C,14805BC52D761C317DE020D11E85ADCFFD5C4263,1,0,0,0,0,192,0,-1--1--1,,1|(1246,-183)|
+1,0,CE817E61D2C6C613D0195D900EBCC25C4A998284,97A45639EF360CA7116C0C3679A2964995509D55,1,0,0,0,0,192,0,-1--1--1,,1|(1691,-74)|
+10,0,Optimal charger required,1042,122,75,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,CHARGING STATIONS IN PLANNING APPROVAL RATE,1095,-317,96,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Charging station deficit,1031,11,63,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Total Chargers,1374,15,42,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,2144FCB3C6595508B6B3408E86A612FCE7DDE18C,D31A7D83B68117BE33F9C390038CAC4C16CD3370,1,0,0,0,0,192,0,-1--1--1,,1|(1237,-21)|
+1,0,CE817E61D2C6C613D0195D900EBCC25C4A998284,D31A7D83B68117BE33F9C390038CAC4C16CD3370,1,0,0,0,0,192,0,-1--1--1,,1|(1447,3)|
+1,0,D31A7D83B68117BE33F9C390038CAC4C16CD3370,AA6CF69C835F0FCC80761FF83779E17E8657EAE5,1,0,0,0,0,192,0,-1--1--1,,1|(1283,34)|
+1,0,810AFE60837976C50A7F6C76F422D8CF36882383,D990FFD735EADA824CE597CC90514867A4A628DC,1,0,0,0,0,192,0,-1--1--1,,1|(991,-260)|
+1,0,01A6E7A22AF580070A7766F417445094A93D2417,AA6CF69C835F0FCC80761FF83779E17E8657EAE5,1,0,0,0,0,192,0,-1--1--1,,1|(1012,70)|
+1,0,AA6CF69C835F0FCC80761FF83779E17E8657EAE5,D990FFD735EADA824CE597CC90514867A4A628DC,1,0,0,0,0,192,0,-1--1--1,,1|(946,-67)|
+11,0,0,1056,-139,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,CHARGING STATIONS IN PLANNING,1056,-89,57,42,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,EV Stocks,1063,201,54,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,8270045D5DD9BFBF449F017C2C1A91D06CB68361,01A6E7A22AF580070A7766F417445094A93D2417,1,0,0,0,0,192,0,-1--1--1,,1|(1155,164)|
+10,0,Available refuel stations,1550,491,85,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,1834,491,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,0C4B351038FE95B547208323443CB27936616A4C,FFA1A22B563FE859B40FDAC1ED3C3933E2177F19,100,0,0,22,0,192,0,-1--1--1,,1|(1678,491)|
+1,0,0C4B351038FE95B547208323443CB27936616A4C,2B850AFE62619BA343C30B6C488F8D91A6140B22,4,0,0,22,0,192,0,-1--1--1,,1|(1779,491)|
+11,0,0,1728,491,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,Refuel stations scrappage,1728,517,70,18,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,INITIAL REFUEL STATIONS,1546,341,86,18,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,531301F02CA6E7D230A7811211B97194040CA00C,FFA1A22B563FE859B40FDAC1ED3C3933E2177F19,1,0,0,0,0,192,1,-1--1--1,,1|(1517,413)|
+10,0,REFUEL STATION COMMISSIONING TIME,1377,359,78,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Refuel stations under construction,1224,496,102,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,DA02FE70CE1C4978410D6C135EA748762CE8E091,4336DA20F5DE4CF07D433DA6E9F6EF659637402D,100,0,0,22,0,192,0,-1--1--1,,1|(1355,493)|
+1,0,DA02FE70CE1C4978410D6C135EA748762CE8E091,FFA1A22B563FE859B40FDAC1ED3C3933E2177F19,4,0,0,22,0,192,0,-1--1--1,,1|(1430,493)|
+11,0,0,1390,493,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,refuel stations deployed,1390,543,68,42,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,967,491,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,56B104BED10E79DC6BA681F48CE996BC492BAB00,6F29A804758C44EC0569EE3FF4073B996228C45B,100,0,0,22,0,192,0,-1--1--1,,1|(1013,491)|
+1,0,56B104BED10E79DC6BA681F48CE996BC492BAB00,4336DA20F5DE4CF07D433DA6E9F6EF659637402D,4,0,0,22,0,192,0,-1--1--1,,1|(1092,491)|
+1,0,F4CAD52C22058C4E92FAE3E3DE628E6083FDA616,DA02FE70CE1C4978410D6C135EA748762CE8E091,1,0,0,0,0,192,0,-1--1--1,,1|(1391,420)|
+10,0,REFUEL STATION LIFESPAN,1771,359,78,18,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,2673F1255F4D03B1E1D114A34AA53771584A11EB,0C4B351038FE95B547208323443CB27936616A4C,1,0,0,0,0,192,0,-1--1--1,,1|(1702,418)|
+1,0,4336DA20F5DE4CF07D433DA6E9F6EF659637402D,DA02FE70CE1C4978410D6C135EA748762CE8E091,1,0,0,0,0,192,0,-1--1--1,,1|(1246,447)|
+1,0,FFA1A22B563FE859B40FDAC1ED3C3933E2177F19,42D06314B07629200989E9FC7F55DC3439E05852,1,0,0,0,0,192,0,-1--1--1,,1|(1703,538)|
+10,0,ICV REFUELING STATIONS IN PLANNING APPROVAL RATE,1095,313,119,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Refuel station deficit,1031,641,74,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Total Refuel stations,1374,645,82,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,4336DA20F5DE4CF07D433DA6E9F6EF659637402D,3F401A6F82BD3886889D52C7DB542B47AC8DA5E4,1,0,0,0,0,192,0,-1--1--1,,1|(1237,609)|
+1,0,FFA1A22B563FE859B40FDAC1ED3C3933E2177F19,3F401A6F82BD3886889D52C7DB542B47AC8DA5E4,1,0,0,0,0,192,0,-1--1--1,,1|(1447,633)|
+1,0,3F401A6F82BD3886889D52C7DB542B47AC8DA5E4,33D36EA5D96E2D3C1596A7EE1722EBB417E594A6,1,0,0,0,0,192,0,-1--1--1,,1|(1283,664)|
+1,0,E17CDF9D6ACB3DCD9A7F03AC87F119EF4803BDC3,56B104BED10E79DC6BA681F48CE996BC492BAB00,1,0,0,0,0,192,0,-1--1--1,,1|(991,370)|
+1,0,33D36EA5D96E2D3C1596A7EE1722EBB417E594A6,56B104BED10E79DC6BA681F48CE996BC492BAB00,1,0,0,0,0,192,0,-1--1--1,,1|(973,569)|
+11,0,0,1056,491,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,Refuel stations in planning,1056,541,79,42,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,EV Stocks,1042,812,48,10,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,ICV Stocks,1124,857,57,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,optimal refuel stations,1004,720,65,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,CDF8E3600606312664F307678CD549B247D996F2,33D36EA5D96E2D3C1596A7EE1722EBB417E594A6,1,0,0,0,0,192,0,-1--1--1,,1|(929,668)|
+1,0,8A364AFA4F38B222A1CF763E7910EBCDECC90120,CDF8E3600606312664F307678CD549B247D996F2,1,0,0,0,0,192,0,-1--1--1,,1|(1032,825)|
+10,0,Total stations,1957,201,62,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,FFA1A22B563FE859B40FDAC1ED3C3933E2177F19,0428CF640718B5049E1B762E17044D938C401EBC,1,0,0,0,0,192,0,-1--1--1,,1|(1824,233)|
+1,0,CE817E61D2C6C613D0195D900EBCC25C4A998284,0428CF640718B5049E1B762E17044D938C401EBC,1,0,0,0,0,192,0,-1--1--1,,1|(1743,94)|
+10,0,Charging station coverage,2082,-50,75,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Refuel stations coverage,2177,394,68,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,0428CF640718B5049E1B762E17044D938C401EBC,67618E5B7C137B84CEC55035201D9742837C80C6,1,0,0,0,0,192,0,-1--1--1,,1|(2034,78)|
+1,0,0428CF640718B5049E1B762E17044D938C401EBC,ACA71F2F38C30E89C00054CEE021A255D318D789,1,0,0,0,0,192,0,-1--1--1,,1|(2106,302)|
+1,0,FFA1A22B563FE859B40FDAC1ED3C3933E2177F19,ACA71F2F38C30E89C00054CEE021A255D318D789,1,0,0,0,0,192,0,-1--1--1,,1|(2006,765)|
+1,0,CE817E61D2C6C613D0195D900EBCC25C4A998284,67618E5B7C137B84CEC55035201D9742837C80C6,1,0,0,0,0,192,0,-1--1--1,,1|(2011,-309)|
+10,0,charger to EV ratio,611,47,85,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,316,45,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,3B9723A1F0E1DEE86933CE5F4F2102ED33A3E1A8,D684AA24BC416E2D90DFC2E89726DA26CC1BE0A6,100,0,0,22,0,192,0,-1--1--1,,1|(373,45)|
+1,0,3B9723A1F0E1DEE86933CE5F4F2102ED33A3E1A8,AFAE6B08F4821BC85D96414E2684DBFE886C499A,4,0,0,22,0,192,0,-1--1--1,,1|(479,45)|
+11,0,0,426,45,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,Change in Charger to EV ratio,426,95,85,42,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,CHARGER TO EVE RATION LIMIT,297,208,82,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,TIME TO CHANGE CHARGER TO EV RATIO,493,208,81,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,INITIAL CHARGER TO EV RATIO,718,154,78,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,INITIAL EV STOCK,613,322,61,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,"INITIAL NO. OF CHARGING STATIONS",841,262,101,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,7A055E2E44A6252F69EA26C745CD1033FC2129B1,EA3DB6A880EBC41426E94A10D6246ADCD847FE56,1,0,0,0,0,192,0,-1--1--1,,1|(319,148)|
+1,0,88EE0D5BA84A5F3ACB9EF6F8CD93B00AFE89CA58,EA3DB6A880EBC41426E94A10D6246ADCD847FE56,1,0,0,0,0,192,0,-1--1--1,,1|(487,142)|
+1,0,AFAE6B08F4821BC85D96414E2684DBFE886C499A,EA3DB6A880EBC41426E94A10D6246ADCD847FE56,1,0,0,0,0,192,0,-1--1--1,,1|(462,-24)|
+1,0,4400A5BD2E8D09363A7C9BC3866A8DC1DB9F078E,AFAE6B08F4821BC85D96414E2684DBFE886C499A,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,0,47693C0C4F42F5EA0CDC47DA1D2879BB55E73CA4,4400A5BD2E8D09363A7C9BC3866A8DC1DB9F078E,1,0,0,0,0,192,0,-1--1--1,,1|(596,211)|
+1,0,035E3C2C0735D37345E1BDC73036E5F0C399C3B3,4400A5BD2E8D09363A7C9BC3866A8DC1DB9F078E,1,0,0,0,0,192,0,-1--1--1,,1|(827,190)|
+10,0,refuel station to ICV ratio,703,759,85,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,408,757,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,A572D537B16D2BD36EB6D9992014284571FC28D5,F9125B3E187A779359C531FAB63F7EAE126DB406,100,0,0,22,0,192,0,-1--1--1,,1|(465,757)|
+1,0,A572D537B16D2BD36EB6D9992014284571FC28D5,126FEA9183CF0ACEC003504138F68898E17B84FC,4,0,0,22,0,192,0,-1--1--1,,1|(571,757)|
+11,0,0,518,757,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,Change in station to ICV ratio,518,807,94,42,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,STATION TO ICV RATION LIMIT,389,920,74,18,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,TIME TO CHANGE REFUEL STATIONS TO ICV RATIO,585,920,96,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,INITIAL REFUEL STATION TO ICV RATIO,810,866,101,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,4BDAC381605147F5C5179C974779DCC738FD89D1,382B8436A3DEF866A2F3273C8DC363F4982369FC,1,0,0,0,0,192,0,-1--1--1,,1|(410,854)|
+1,0,355A8540D69A3C1AB5CB57342157A4F4F0A269D9,382B8436A3DEF866A2F3273C8DC363F4982369FC,1,0,0,0,0,192,0,-1--1--1,,1|(578,845)|
+1,0,126FEA9183CF0ACEC003504138F68898E17B84FC,382B8436A3DEF866A2F3273C8DC363F4982369FC,1,0,0,0,0,192,0,-1--1--1,,1|(565,664)|
+1,0,139A15BAE9C9310ECC3EC4BA3500C05940E96091,126FEA9183CF0ACEC003504138F68898E17B84FC,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+1,0,AFAE6B08F4821BC85D96414E2684DBFE886C499A,01A6E7A22AF580070A7766F417445094A93D2417,1,0,0,0,0,192,0,-1--1--1,,1|(830,55)|
+10,0,INITIAL ICV STOCK,780,988,61,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,INITIAL REFUEL STATIONS,947,967,74,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,3724E671A0E17A5850EDC82ADB5B2FF0C5F04A7E,139A15BAE9C9310ECC3EC4BA3500C05940E96091,1,0,0,0,0,192,0,-1--1--1,,1|(739,927)|
+1,0,2FD31806326CA36EF9BBC61B884E819494D41E6D,139A15BAE9C9310ECC3EC4BA3500C05940E96091,1,0,0,0,0,192,0,-1--1--1,,1|(964,894)|
+1,0,126FEA9183CF0ACEC003504138F68898E17B84FC,CDF8E3600606312664F307678CD549B247D996F2,1,0,0,0,0,192,0,-1--1--1,,1|(883,754)|
+\\\---/// Sketch information - do not modify anything except names
+V301  Do not put anything below this section - it will be ignored
+*Market shares
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,121,0
+10,0,EV Stocks,5,123,54,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,total vehicle market,178,276,102,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,ICV Stocks,6,430,57,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,EV Market Share,391,150,76,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV Market share,480,386,78,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,E5BF0EA4F97C05F415B010D7029E1147D6964E22,659CAC62BC9367F64C2EA5C8BB8445A7239A68A2,1,0,0,0,0,192,0,-1--1--1,,1|(196,96)|
+1,0,C8D745B2B705CB38CA9D4A3396EB654DC49E96D9,659CAC62BC9367F64C2EA5C8BB8445A7239A68A2,1,0,0,0,0,192,0,-1--1--1,,1|(352,225)|
+1,0,D5CC26501832D87B567B0C51431B60A663BD3358,809A3AE98003FD4A323791C2B4EF4BE423156C31,1,0,0,0,0,192,0,-1--1--1,,1|(364,491)|
+1,0,C8D745B2B705CB38CA9D4A3396EB654DC49E96D9,809A3AE98003FD4A323791C2B4EF4BE423156C31,1,0,0,0,0,192,0,-1--1--1,,1|(345,310)|
+12,0,0,847,228,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+EV Market Share,Graph
+12,0,0,851,639,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+ICV Market share,Graph
+\\\---/// Sketch information - do not modify anything except names
+V301  Do not put anything below this section - it will be ignored
+*Vehicle Price Account 
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,82,0
+10,0,VAT,479,-630,42,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,VEHICLE PURCHASE TAX,495,-713,69,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Time,553,-943,35,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Time,440,-972,29,10,8,2,1,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+12,0,0,1574,-855,300,200,0,15,0,0,2,0,0,0,0,0,0,0,0,0
+"EV Price + tax",Graph
+10,0,POLICY END DATE,496,-564,82,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,FX RATE,481,-782,57,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,C99B892EDA7914B16BE91933390ECA1397F3B5EF,118BDD968D109C845D09A2D92C9062A2555A0D86,1,0,0,0,0,192,0,-1--1--1,,1|(474,-868)|
+10,0,EV Total cost,778,269,58,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Base cost,358,199,55,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Battery Capacity,338,307,87,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Unit Battery Cost,326,381,78,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,42081AD696B7DC5DE9B6DFB1B6C03583E5834219,ABDD8B6B305888D5DA73559706B1F520EC8D313F,1,0,0,0,0,192,0,-1--1--1,,1|(577,218)|
+1,0,82A17E524ABD1D279F2129DA479A5C5A634A1FCB,ABDD8B6B305888D5DA73559706B1F520EC8D313F,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,DF831E3487B09914F1CEA979F9316B05EDC49B86,ABDD8B6B305888D5DA73559706B1F520EC8D313F,1,0,0,0,0,192,0,-1--1--1,,1|(597,386)|
+10,0,Markup,901,200,57,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,EV MSRP,1025,262,76,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,ABDD8B6B305888D5DA73559706B1F520EC8D313F,39CA24CC0009B173CAD1EEC7D309244C2AA9F1E3,1,0,0,0,0,192,0,-1--1--1,,1|(902,289)|
+1,0,6089C43031BDB8925F6176707B9EDAF3725B01D3,39CA24CC0009B173CAD1EEC7D309244C2AA9F1E3,1,0,0,0,0,192,0,-1--1--1,,1|(1009,207)|
+10,0,ICV MSRP,1058,465,51,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV Total cost,727,525,61,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Markup,906,581,48,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Base cost,310,502,55,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,IC Engine cost,289,569,53,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,E515DAF021143C71A4333A265EBE6AEC7A5769E5,543E8A08446E5C242D69BD4228D8F468AE78355C,1,0,0,0,0,192,0,-1--1--1,,1|(446,474)|
+1,0,09190D938B7B0455A10512A6948CAF47ED98D8D2,543E8A08446E5C242D69BD4228D8F468AE78355C,1,0,0,0,0,192,0,-1--1--1,,1|(419,599)|
+1,0,543E8A08446E5C242D69BD4228D8F468AE78355C,0F818005B9BB2487A96DEF0B0B20ADD81FEE3815,1,0,0,0,0,192,0,-1--1--1,,1|(866,521)|
+1,0,9EC3C85EC5343CDCCE2B201FCB9ED4F993C32A24,0F818005B9BB2487A96DEF0B0B20ADD81FEE3815,1,0,0,0,0,192,0,-1--1--1,,1|(997,537)|
+10,0,"EV Price + tax",1288,246,62,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,"ICV Price + Tax",1318,438,66,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,VEHICLE PURCHASE TAX,1114,359,74,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,0F818005B9BB2487A96DEF0B0B20ADD81FEE3815,46B041E3A68E4FFBBD903AAD8FDB81F8B5A5971B,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,EBCE270477C5EC29742286C7BE8A48ADFB7A82B4,DD496CBDE0BB1D36924BF1BC6805B35EBA9792BC,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,EBCE270477C5EC29742286C7BE8A48ADFB7A82B4,46B041E3A68E4FFBBD903AAD8FDB81F8B5A5971B,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,POLICY END DATE,995,107,61,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,BB8E9EF05AAC01B51C0B2966D16221A4A961CC4D,DD496CBDE0BB1D36924BF1BC6805B35EBA9792BC,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,VAT,928,364,32,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,B2D710D7503F271E1D6C793F7083A39A8D74F9A4,DD496CBDE0BB1D36924BF1BC6805B35EBA9792BC,1,0,0,0,0,192,0,-1--1--1,,1|(1074,302)|
+1,0,B2D710D7503F271E1D6C793F7083A39A8D74F9A4,46B041E3A68E4FFBBD903AAD8FDB81F8B5A5971B,1,0,0,0,0,192,0,-1--1--1,,1|(1082,414)|
+10,0,Time,1117,86,35,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,1856BBD12FC4D9F8A41ED8A1E4BA8719BE5DAD50,DD496CBDE0BB1D36924BF1BC6805B35EBA9792BC,1,0,0,0,0,192,0,-1--1--1,,1|(1209,147)|
+1,0,39CA24CC0009B173CAD1EEC7D309244C2AA9F1E3,DD496CBDE0BB1D36924BF1BC6805B35EBA9792BC,1,0,0,0,0,192,0,-1--1--1,,1|(1167,249)|
+\\\---/// Sketch information - do not modify anything except names
+V301  Do not put anything below this section - it will be ignored
+*Emissions accounting
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,90,0
+10,0,EV Stocks,163,32,54,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,ICV Stocks,400,569,57,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,AVERAGE ELECTRICITY SUPPLY EMISSIONS,217,459,100,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,EMBODIED EMISSIONS,181,152,70,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,EV FUEL ECONOMY,22,390,88,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,AVKT,596,239,44,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,EV TAIL PIPE EMISSION,434,336,65,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV TAIL PIPE EMISSION,569,806,65,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,PETROL FUEL SUPPLY EMISSION FACTOR,251,973,103,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV FUEL ECONOMY,505,1021,69,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,EV emissions,646,70,60,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,358,70,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,7C227F052C0186E15B200261755C97F5AF7E7424,A332A959530FA4E83FBE37E0E418A95C4A82224A,100,0,0,22,0,192,0,-1--1--1,,1|(419,70)|
+1,0,7C227F052C0186E15B200261755C97F5AF7E7424,B5E1C37944A2627FFDC6AFB1B95CD32372D4F05D,4,0,0,22,0,192,0,-1--1--1,,1|(534,70)|
+11,0,0,477,70,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,"EV emissions flow-in",477,107,84,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,909,70,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,045C0802BA4A587D5D4791CBD50CFF0F77C78896,B5E1C37944A2627FFDC6AFB1B95CD32372D4F05D,100,0,0,22,0,192,0,-1--1--1,,1|(751,70)|
+1,0,045C0802BA4A587D5D4791CBD50CFF0F77C78896,A4F93327D8E9BABE53D8D27EDC143F5694FE6985,4,0,0,22,0,192,0,-1--1--1,,1|(853,70)|
+11,0,0,802,70,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,EV Emissions outflow,802,107,87,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,6A1E4A7E7AB17E18F5A9F5F92CA23E5773B69DC9,965AAB275D143A5EF8B934362418860950CA436B,1,0,0,0,0,192,0,-1--1--1,,1|(445,11)|
+10,0,Average electricity supply emissions per km,254,297,86,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,35DFC589C75651ED72ED28712DD3D2237B0D97A0,DDF2F335F522AF732F18CBE4F0C140C26811DB28,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+1,0,E439966BA009835BDE613B98AB5297D6E2EA4A2E,DDF2F335F522AF732F18CBE4F0C140C26811DB28,1,0,0,0,0,192,0,-1--1--1,,1|(313,384)|
+1,0,CF9441387712873A0074E878BF07897BCDFFF69D,965AAB275D143A5EF8B934362418860950CA436B,1,0,0,0,0,192,0,-1--1--1,,1|(313,119)|
+1,0,DDF2F335F522AF732F18CBE4F0C140C26811DB28,965AAB275D143A5EF8B934362418860950CA436B,1,0,0,0,0,192,0,-1--1--1,,1|(366,222)|
+1,0,FD32B81B7C39EC57E6D676A028024333F5E5E945,965AAB275D143A5EF8B934362418860950CA436B,1,0,0,0,0,192,0,-1--1--1,,1|(470,253)|
+1,0,49CFCCB787D1C75247C7B5AAF05B1D048DEB2855,965AAB275D143A5EF8B934362418860950CA436B,1,0,0,0,0,192,0,-1--1--1,,1|(588,166)|
+1,0,B5E1C37944A2627FFDC6AFB1B95CD32372D4F05D,B4ADF45C4AC9ED88BDAACB41E4E0DDC5BE5AC9BE,1,0,0,0,0,192,0,-1--1--1,,1|(760,167)|
+10,0,ICV emissions,686,640,63,29,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,398,640,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,2C4D1136E846EED33ACDCD67CE5901BC3DB0B0A0,419BD97DFE7566C970E77C2E5A01240C152EF8DB,100,0,0,22,0,192,0,-1--1--1,,1|(459,640)|
+1,0,2C4D1136E846EED33ACDCD67CE5901BC3DB0B0A0,778E6DB8798D2FF05432E99C91AC32DBDB9C3669,4,0,0,22,0,192,0,-1--1--1,,1|(573,640)|
+11,0,0,517,640,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,"ICV emissions flow-in",517,677,84,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,949,640,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,8CA69EB6FC49E3FBA217D996CB6DFBB033023646,778E6DB8798D2FF05432E99C91AC32DBDB9C3669,100,0,0,22,0,192,0,-1--1--1,,1|(792,640)|
+1,0,8CA69EB6FC49E3FBA217D996CB6DFBB033023646,A62462A0D379C7B1FD80ED0680A77CEDAC6E6B2E,4,0,0,22,0,192,0,-1--1--1,,1|(893,640)|
+11,0,0,842,640,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,ICV Emissions outflow,842,677,73,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,778E6DB8798D2FF05432E99C91AC32DBDB9C3669,6C006240F3DECA0E58C18A99DF37FF6E5BFCB9C1,1,0,0,0,0,192,0,-1--1--1,,1|(811,737)|
+10,0,AVKT,696,939,41,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Average petrol fuel emissions per km,443,869,84,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV EMBODIED EMISSIONS,215,735,70,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,AB6643A04908D88E6268E6516C8AC6C76B510AAB,2C4D1136E846EED33ACDCD67CE5901BC3DB0B0A0,1,0,0,0,0,192,0,-1--1--1,,1|(379,704)|
+1,0,F6BBD01DB7D938B5FEDB6B0A8E45E6B29799026D,2C4D1136E846EED33ACDCD67CE5901BC3DB0B0A0,1,0,0,0,0,192,0,-1--1--1,,1|(492,580)|
+1,0,076EE08767AC3CF22EF14BCBAE596DB8AC7E2534,2A152CCAFD041D6E80CB97150CC8220763E1D75E,1,0,0,0,0,192,0,-1--1--1,,1|(602,732)|
+1,0,2591090AA6C57101AE760C5CA4EF7FBE5D930F99,BAB67868FAD3498DDD3155731E05CA29FA0794AB,1,0,0,0,0,192,0,-1--1--1,,1|(269,897)|
+1,0,45147FC700D5134E14DC42E2909C83D6A5EEAC3B,BAB67868FAD3498DDD3155731E05CA29FA0794AB,1,0,0,0,0,192,0,-1--1--1,,1|(550,967)|
+1,0,BAB67868FAD3498DDD3155731E05CA29FA0794AB,2A152CCAFD041D6E80CB97150CC8220763E1D75E,1,0,0,0,0,192,0,-1--1--1,,1|(434,757)|
+1,0,9410CDD645076565A7B3A08A2797D9908F1FD2B5,2A152CCAFD041D6E80CB97150CC8220763E1D75E,1,0,0,0,0,192,0,-1--1--1,,1|(675,758)|
+10,0,Total emissions,961,308,68,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Emissions per car,1230,219,68,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,total vehicle market,1067,125,102,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,B5E1C37944A2627FFDC6AFB1B95CD32372D4F05D,D578C8B099204DA7BC58A3F96B7D7F51148BDA05,1,0,0,0,0,192,0,-1--1--1,,1|(731,319)|
+1,0,778E6DB8798D2FF05432E99C91AC32DBDB9C3669,D578C8B099204DA7BC58A3F96B7D7F51148BDA05,1,0,0,0,0,192,0,-1--1--1,,1|(783,461)|
+1,0,D578C8B099204DA7BC58A3F96B7D7F51148BDA05,65F751FBFED5EC88FB7D5E1B836B50F920DAB14D,1,0,0,0,0,192,0,-1--1--1,,1|(1170,286)|
+1,0,D3BCABA3D365026E7F5437DD68CEFB0229C3287C,65F751FBFED5EC88FB7D5E1B836B50F920DAB14D,1,0,0,0,0,192,0,-1--1--1,,1|(1227,152)|
+10,0,kg to Tons converter,896,216,65,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,DF68B056D845A7F9BBDE94F4457D97D77F4F6422,D578C8B099204DA7BC58A3F96B7D7F51148BDA05,1,0,0,0,0,192,0,-1--1--1,,1|(980,234)|
+10,0,"1 Yr",901,511,59,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,"1 Yr",823,-47,59,15,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,A846E12E14777C51387E252B6CE2B5F9048D91B3,045C0802BA4A587D5D4791CBD50CFF0F77C78896,1,0,0,0,0,192,0,-1--1--1,,1|(839,1)|
+1,0,314FDD02B0D74224C2F32F69633F76EC4EA30459,8CA69EB6FC49E3FBA217D996CB6DFBB033023646,1,0,0,0,0,192,0,-1--1--1,,1|(893,585)|
+10,0,Average Emissions per EV,1112,-37,85,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,EV Stocks,917,-106,54,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,B5E1C37944A2627FFDC6AFB1B95CD32372D4F05D,1A640448C2C4C87DA9A8EA5E98053AB8119A0FFA,1,0,0,0,0,192,0,-1--1--1,,1|(983,10)|
+1,0,CFAF126F1AD24A735C210751BEF2A5E08BF111AB,1A640448C2C4C87DA9A8EA5E98053AB8119A0FFA,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,Average ICV emissions,212,619,66,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,778E6DB8798D2FF05432E99C91AC32DBDB9C3669,158CB9FCD8E8FA9ADE3B382E59BAB4552AF561A5,1,0,0,0,0,192,0,-1--1--1,,1|(486,506)|
+1,0,F6BBD01DB7D938B5FEDB6B0A8E45E6B29799026D,158CB9FCD8E8FA9ADE3B382E59BAB4552AF561A5,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+\\\---/// Sketch information - do not modify anything except names
+V301  Do not put anything below this section - it will be ignored
+*Energy Consumption
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,0
+10,0,EV Stocks,265,223,54,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,ICV Stocks,391,473,57,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,AVKT,271,346,41,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,EV Electricity demand,626,211,86,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Petrol Fuel Demand,672,478,61,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Total fuel demand,867,322,84,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,"Elect-BBL converter",603,287,65,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,"Petrol Fuel-BBL Converter",601,382,70,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,0482002536DDF91B63FC4D8F828A2961EACF8E5D,3ACFDDE0481CDC5A5A0DCB85045708B80983310D,1,0,0,0,0,192,0,-1--1--1,,1|(441,262)|
+1,0,0482002536DDF91B63FC4D8F828A2961EACF8E5D,4DE432ADD259ADBDD685F2349CEA1B8B9061241E,1,0,0,0,0,192,0,-1--1--1,,1|(445,381)|
+1,0,3BE4DB93EEA0A9D01CF6015E88B0E4F0FD6F8763,3ACFDDE0481CDC5A5A0DCB85045708B80983310D,1,0,0,0,0,192,0,-1--1--1,,1|(440,166)|
+1,0,70C14E794B2BB131F6A92FDBAE0F0E7C818404AB,4DE432ADD259ADBDD685F2349CEA1B8B9061241E,1,0,0,0,0,192,0,-1--1--1,,1|(507,462)|
+1,0,9150078F602316C28ADD1868A954890DCAB6C3B7,484E397668891AD7F032F135C98D4038A1467855,1,0,0,0,0,192,0,-1--1--1,,1|(714,275)|
+1,0,22F4BDCA384AE672EF2F07A8741E7FF5758C3FD7,484E397668891AD7F032F135C98D4038A1467855,1,0,0,0,0,192,0,-1--1--1,,1|(766,394)|
+1,0,3ACFDDE0481CDC5A5A0DCB85045708B80983310D,484E397668891AD7F032F135C98D4038A1467855,1,0,0,0,0,192,0,-1--1--1,,1|(837,224)|
+1,0,4DE432ADD259ADBDD685F2349CEA1B8B9061241E,484E397668891AD7F032F135C98D4038A1467855,1,0,0,0,0,192,0,-1--1--1,,1|(838,465)|
+10,0,Fuel Demand per car,1162,318,80,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,484E397668891AD7F032F135C98D4038A1467855,8D88D084CA8CA26CDCC0E8A59947F4AA032AB47C,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,total vehicle market,1015,227,102,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,BE739EAB95F009842244FA48E0E042CA7E0AFC3E,8D88D084CA8CA26CDCC0E8A59947F4AA032AB47C,1,0,0,0,0,192,0,-1--1--1,,1|(1151,250)|
+10,0,Effective EV FE,343,57,64,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,CE5600D849267A36CAF9F4F7CDAFF78D570E37BD,3ACFDDE0481CDC5A5A0DCB85045708B80983310D,1,0,0,0,0,192,0,-1--1--1,,1|(439,85)|
+10,0,effective ICV FE,462,581,61,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,28B17BDD6F5D3F98CAEDBC7A75385DC8A5EF0111,4DE432ADD259ADBDD685F2349CEA1B8B9061241E,1,0,0,0,0,192,0,-1--1--1,,1|(589,578)|
+\\\---/// Sketch information - do not modify anything except names
+V301  Do not put anything below this section - it will be ignored
+*Cultural factors and HDI
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,68,0
+10,0,INDIVIDUALISM,421,-60,70,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,POWER DISTANCE INDEX,632,-76,88,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,INDULGENCE INDEX,784,-80,81,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,MASCULINITY INDEX,962,-86,81,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,UNCERTAINTY AVOIDANCE,317,94,81,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,EVA INDEX,792,103,51,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,PFAD INDEX,794,215,55,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,E4FDA04F56B7827BE360B58998BD5355A5272E10,EC89CFD66AF7F3F433DFAA4A20514D9E0026E5F5,1,0,0,0,0,192,0,-1--1--1,,1|(503,114)|
+1,0,27B815674F18A88260CB4316409D8D0CE7069322,EC89CFD66AF7F3F433DFAA4A20514D9E0026E5F5,1,0,0,0,0,192,0,-1--1--1,,1|(579,-15)|
+1,0,80CBDDB87EC5432C21F5F0A7CE7567DC21133E88,EC89CFD66AF7F3F433DFAA4A20514D9E0026E5F5,1,0,0,0,0,192,0,-1--1--1,,1|(753,7)|
+1,0,98168BAC42F36645532998EBEFCF2437A16E4302,EC89CFD66AF7F3F433DFAA4A20514D9E0026E5F5,1,0,0,0,0,192,0,-1--1--1,,1|(853,24)|
+1,0,55F8619DD150C56B8EDE6F622AF3015A0F9752B1,EC89CFD66AF7F3F433DFAA4A20514D9E0026E5F5,1,0,0,0,0,192,0,-1--1--1,,1|(966,-4)|
+1,0,EC89CFD66AF7F3F433DFAA4A20514D9E0026E5F5,AB50B518A9DCB6083D777AA11162D2B9DE915642,0,0,0,0,0,192,0,-1--1--1,,1|(0,0)|
+10,0,Human Development Index,800,439,79,42,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,451,435,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,1B4DB0B855B0E42A77F71AA1E547E5E098D10050,A5E5ECB29499DA6BC378C33DCC75C7F6A2F97619,100,0,0,22,0,192,0,-1--1--1,,1|(523,435)|
+1,0,1B4DB0B855B0E42A77F71AA1E547E5E098D10050,5D439E22F5D9FD70C0FBEC0E883CBA5727BF9D29,4,0,0,22,0,192,0,-1--1--1,,1|(659,435)|
+11,0,0,591,435,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,HDI change,591,472,53,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,HDI MAXIMUM LIMIT,444,597,77,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,TIME TO CHANGE HDI,630,585,79,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,INITIAL HDI,877,588,51,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,F8EEE7182A67A450ECE6E20D3993C095D48CE0E4,5D439E22F5D9FD70C0FBEC0E883CBA5727BF9D29,1,0,0,0,0,192,1,-1--1--1,,1|(862,521)|
+1,0,759C950675930D893AEB5461839E1EE788A56230,1E7799C3B488B625ADF44E47A52F58D852DCEF00,1,0,0,0,0,192,0,-1--1--1,,1|(467,533)|
+1,0,A66263AF3D368F0BF581EAC38A9FF4FB8B5A6426,1E7799C3B488B625ADF44E47A52F58D852DCEF00,1,0,0,0,0,192,0,-1--1--1,,1|(667,537)|
+1,0,5D439E22F5D9FD70C0FBEC0E883CBA5727BF9D29,1E7799C3B488B625ADF44E47A52F58D852DCEF00,1,0,0,0,0,192,0,-1--1--1,,1|(677,375)|
+\\\---/// Sketch information - do not modify anything except names
+V301  Do not put anything below this section - it will be ignored
+*Vehicle Range 
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,0
+10,0,Battery Capacity,285,224,76,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Effective EV FE,221,313,64,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,EV Range,446,302,51,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,B77C10C35B8E531F36205E98FE4075AE815C9E4A,4563F1245D70F7A9582E7DC8C80E5EB21228DE6C,1,0,0,0,0,192,0,-1--1--1,,1|(398,230)|
+1,0,9A4FEC1D4608FB3AD765BA5E22A27AD6538889AB,4563F1245D70F7A9582E7DC8C80E5EB21228DE6C,1,0,0,0,0,192,0,-1--1--1,,1|(328,378)|
+10,0,Time,107,120,35,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,C1CA8BA9CFA9F65033E6319C6FD1972B4EDE2E31,B77C10C35B8E531F36205E98FE4075AE815C9E4A,1,0,0,0,0,192,0,-1--1--1,,1|(182,147)|
+10,0,effective ICV FE,691,147,61,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,ICE TANK CAPACITY,720,300,87,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV Range,907,215,51,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,1511B468DFEAB0E2C2B9C8AFD20AA39BC48730F4,F817044CE15861A530EABB52F40DF58B3D26D047,1,0,0,0,0,192,0,-1--1--1,,1|(846,153)|
+1,0,21D098AA957E2CAAC34F58410A81BCE0B82D9E2F,F817044CE15861A530EABB52F40DF58B3D26D047,1,0,0,0,0,192,0,-1--1--1,,1|(875,279)|
+\\\---/// Sketch information - do not modify anything except names
+V301  Do not put anything below this section - it will be ignored
+*Technology improvement
+$-1--1--1,0,|12||-1--1--1|-1--1--1|-1--1--1|-1--1--1|-1--1--1|96,96,100,0
+10,0,"Cumulative R & D Expenditure",236,-281,86,42,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,-80,-284,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,6F1857FF6351620962CD01C69DCCD9724753225F,0961EE6FB73EA3D5F921AF5FDB08CB7F0E84C33F,100,0,0,22,0,192,0,-1--1--1,,1|(-27,-284)|
+1,0,6F1857FF6351620962CD01C69DCCD9724753225F,3E3C0648E0B7E6D538991DC431077CE6BC0B6250,4,0,0,22,0,192,0,-1--1--1,,1|(89,-284)|
+11,0,0,22,-284,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,"R & D Expenditure",22,-247,85,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,"INITIAL R & D INVESTMENT",192,-402,78,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,EC834F374F996380833327E4095A3545FFCA110E,3E3C0648E0B7E6D538991DC431077CE6BC0B6250,1,0,0,0,0,192,1,-1--1--1,,1|(286,-357)|
+10,0,"Annual R & D Expenditure",-48,-403,77,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,80555064AF21F2E23E8CB82C03A6C9229CAC6BAC,D393BB9DA95E87E62FF405FD686C97CC9BFD6D93,1,0,0,0,0,192,0,-1--1--1,,1|(15,-347)|
+10,0,Cumulative Electric Vehicle production,1098,-282,86,42,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,782,-285,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,654EBCB6DC2446E6D3A0570AFAC35589B735CE79,1854D50EEC6F020B58DE94B7C76402DF62420F30,100,0,0,22,0,192,0,-1--1--1,,1|(835,-285)|
+1,0,654EBCB6DC2446E6D3A0570AFAC35589B735CE79,F009B6B68E5B21FAC5E3C458172F741DBB0C8278,4,0,0,22,0,192,0,-1--1--1,,1|(951,-285)|
+11,0,0,884,-285,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,Electric Vehicle production,884,-248,86,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,EV Experience factor,1302,-148,80,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,"R & D Factor",242,-82,57,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,"Reference R & D Investment",28,-176,75,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Reference Electric Vehicle Production level,942,-142,98,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,F009B6B68E5B21FAC5E3C458172F741DBB0C8278,025FF9B2AE886C87B6E192BF3E98F37737E035DE,1,0,0,0,0,192,0,-1--1--1,,1|(1270,-253)|
+1,0,233E2886079530680766C451495B6CAF047331F4,C6A2E5EC9D90732F14F368A1F7170B3C7CB2BBB6,1,0,0,0,0,192,0,-1--1--1,,1|(143,-181)|
+1,0,F02F34A5193F0D15909620E0F15599DF9C045E35,025FF9B2AE886C87B6E192BF3E98F37737E035DE,1,0,0,0,0,192,0,-1--1--1,,1|(1099,-102)|
+10,0,"Strength of R & D Learning curve",254,28,79,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Strength of EV Production Strength curve,1192,36,84,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,"R&D Learning rate",-31,44,65,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,B5FF0FD03DD2893438B17E433D4D06B58458CF3C,66B69B64AA42DB7BF05E4F13E0CD2EE2649BA185,1,0,0,0,0,192,0,-1--1--1,,1|(89,86)|
+1,0,66B69B64AA42DB7BF05E4F13E0CD2EE2649BA185,C6A2E5EC9D90732F14F368A1F7170B3C7CB2BBB6,1,0,0,0,0,192,0,-1--1--1,,1|(285,-42)|
+1,0,3E3C0648E0B7E6D538991DC431077CE6BC0B6250,C6A2E5EC9D90732F14F368A1F7170B3C7CB2BBB6,1,0,0,0,0,192,0,-1--1--1,,1|(264,-171)|
+1,0,71889976470E9778F83FEF8B30FA7F3F74B73498,025FF9B2AE886C87B6E192BF3E98F37737E035DE,1,0,0,0,0,192,0,-1--1--1,,1|(1320,20)|
+10,0,EV Production costs learning rate,925,60,79,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,E22FECD81CD5FC999AF24D1C4B2B43658016A5AD,71889976470E9778F83FEF8B30FA7F3F74B73498,1,0,0,0,0,192,0,-1--1--1,,1|(1111,92)|
+10,0,EV New Sales,825,-394,72,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,701924B7DE6C2943A10ABF212F6383E20D8F3ED3,654EBCB6DC2446E6D3A0570AFAC35589B735CE79,1,0,0,0,0,192,0,-1--1--1,,1|(822,-343)|
+10,0,EV FUEL ECONOMY,-29,213,55,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,Effective EV FE,263,208,66,29,8,3,0,0,-1,1,0,0,0,0,0,0,0,0
+1,0,C6A2E5EC9D90732F14F368A1F7170B3C7CB2BBB6,9380F6BB43AD8299F23E495519AA216FD302837E,1,0,0,0,0,192,0,-1--1--1,,1|(379,-18)|
+1,0,40AD04D84181198FE2BFF02348224AAAFDDE5C74,9380F6BB43AD8299F23E495519AA216FD302837E,1,0,0,0,0,192,0,-1--1--1,,1|(139,270)|
+10,0,Cumulative ICV Engine production,1869,-305,86,42,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,1553,-308,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,94F5EB86D3FF97B11E20AD68D71978870246402C,C3E6009FA7FF99E9D8921FC64D19751FD32B53EA,100,0,0,22,0,192,0,-1--1--1,,1|(1606,-308)|
+1,0,94F5EB86D3FF97B11E20AD68D71978870246402C,D945BB4DFC25C9019349938E8E3403DF5BD40469,4,0,0,22,0,192,0,-1--1--1,,1|(1722,-308)|
+11,0,0,1655,-308,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,ICV Engine production,1655,-271,68,29,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,ICV Engine Experience factor,2073,-171,80,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Reference ICV Engine Production level,1731,-201,84,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,D945BB4DFC25C9019349938E8E3403DF5BD40469,684C71A18422048D906A505F172FBCCC76031A4D,1,0,0,0,0,192,0,-1--1--1,,1|(2041,-276)|
+1,0,ABDA9DBE9CD06A326FE17DEDD9E142C04F2DB43D,684C71A18422048D906A505F172FBCCC76031A4D,1,0,0,0,0,192,0,-1--1--1,,1|(1881,-226)|
+10,0,Strength of ICV Engine Production Strength curve,1963,13,93,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,4B5D49ED0A43C70F9AF216DA997D6396BEBD3E16,684C71A18422048D906A505F172FBCCC76031A4D,1,0,0,0,0,192,0,-1--1--1,,1|(2091,-3)|
+10,0,ICV Engine Production costs learning rate,1696,37,87,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,0EFA713B44563C60384E11B4B2AF562B57893937,4B5D49ED0A43C70F9AF216DA997D6396BEBD3E16,1,0,0,0,0,192,0,-1--1--1,,1|(1882,69)|
+10,0,ICV New Sales,1568,-455,75,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,1D83BBD0E0F35C96CD2B3BAD6BFB98F735859B0C,94F5EB86D3FF97B11E20AD68D71978870246402C,1,0,0,0,0,192,0,-1--1--1,,1|(1562,-384)|
+10,0,"Cumulative ICV R & D Expenditure",239,565,87,42,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,-77,562,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,F7CE52E7A2BEF1566E8AA1CDEF7A6A6D040970BF,970BF6A1F229D4240453777A2EC6924D42DA485F,100,0,0,22,0,192,0,-1--1--1,,1|(-24,562)|
+1,0,F7CE52E7A2BEF1566E8AA1CDEF7A6A6D040970BF,D3F9224BFC8747001050853118EEB3AD64C17781,4,0,0,22,0,192,0,-1--1--1,,1|(91,562)|
+11,0,0,25,562,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,"ICV R & D Expenditure",25,612,63,42,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,"INITIAL ICV R & D INVESTMENT",195,444,86,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,AEAB0D8AF3E9CCBD94CD5F7A1F12B3DD11C97ABB,D3F9224BFC8747001050853118EEB3AD64C17781,1,0,0,0,0,192,1,-1--1--1,,1|(289,489)|
+10,0,"Annual ICV R & D Expenditure",-45,443,85,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,C9A3E63D3962363F0C75E356734E20FCEEA978A4,FB3F29DCA4325C6F9247020E42FD5A3FD47D81E7,1,0,0,0,0,192,0,-1--1--1,,1|(18,490)|
+10,0,"ICV R & D Factor",245,764,74,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,"Reference ICV R & D Investment",31,670,82,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,15E477CAD886425EB119E7E9BBF56A71DE23939A,92B598EB21C3718EE218D3431BB4132AA54263E2,1,0,0,0,0,192,0,-1--1--1,,1|(146,665)|
+10,0,"Strength of ICV R & D Learning curve",257,874,86,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,"ICV R&D Learning rate",-28,890,80,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,C6D7BDEC1238651B5D27C4B926002D20CED4CAEB,70D276F2F25BE95F04A7E4C3AB080E66BCB286B0,1,0,0,0,0,192,0,-1--1--1,,1|(92,932)|
+1,0,70D276F2F25BE95F04A7E4C3AB080E66BCB286B0,92B598EB21C3718EE218D3431BB4132AA54263E2,1,0,0,0,0,192,0,-1--1--1,,1|(288,804)|
+1,0,D3F9224BFC8747001050853118EEB3AD64C17781,92B598EB21C3718EE218D3431BB4132AA54263E2,1,0,0,0,0,192,0,-1--1--1,,1|(267,675)|
+10,0,ICV FUEL ECONOMY,-77,1065,86,29,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+10,0,effective ICV FE,207,1040,69,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,1A067340C678B6246DE8AE1DBEB52B3948A33DA3,1B5B2E8B09AC35A6EC381DEEB0459E2A0786AF36,1,0,0,0,0,192,0,-1--1--1,,1|(98,1114)|
+1,0,92B598EB21C3718EE218D3431BB4132AA54263E2,1B5B2E8B09AC35A6EC381DEEB0459E2A0786AF36,1,0,0,0,0,192,0,-1--1--1,,1|(368,841)|
+10,0,INITIAL IC ENGINE COST,1719,217,80,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,IC Engine cost,2023,182,64,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,684C71A18422048D906A505F172FBCCC76031A4D,12001D2E13C003623037BA74537CC3F65D56D386,1,0,0,0,0,192,0,-1--1--1,,1|(2208,-112)|
+1,0,F984D871EA1389FE214BBA2E1096FAFA17A9EEF1,12001D2E13C003623037BA74537CC3F65D56D386,1,0,0,0,0,192,0,-1--1--1,,1|(1868,228)|
+10,0,Cumulative ICV Engine production 0,1918,535,86,42,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,1602,532,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,1CB511B211DA0536B253F7C4F02C9D73FFC4F0CB,83DBE5AAD70EDADE358DBE855C90DC91DFC980CA,100,0,0,22,0,192,0,-1--1--1,,1|(1655,532)|
+1,0,1CB511B211DA0536B253F7C4F02C9D73FFC4F0CB,7028C9D02F705BB798106FE20AFD32D217BBB275,4,0,0,22,0,192,0,-1--1--1,,1|(1771,532)|
+11,0,0,1704,532,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,ICV Engine production 0,1704,558,46,18,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Base cost Experience factor,2122,669,80,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Reference Base cost Experience level,1780,639,72,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,7028C9D02F705BB798106FE20AFD32D217BBB275,02EE7AB658101FC65133E37D0AD3612BDFE95A15,1,0,0,0,0,192,0,-1--1--1,,1|(2090,564)|
+1,0,E630549EF0090E951485AD79A5E40E2E9463954B,02EE7AB658101FC65133E37D0AD3612BDFE95A15,1,0,0,0,0,192,0,-1--1--1,,1|(1930,614)|
+10,0,Strength of Base cost learning curve,2012,853,87,27,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,ED3759C8A405D826C5566DF2558DA2FCBE241C5B,02EE7AB658101FC65133E37D0AD3612BDFE95A15,1,0,0,0,0,192,0,-1--1--1,,1|(2140,837)|
+10,0,Base costs learning rate,1745,877,82,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,38D43DCD0587BD7E6C998EC0D18B1AC99A93F8FF,ED3759C8A405D826C5566DF2558DA2FCBE241C5B,1,0,0,0,0,192,0,-1--1--1,,1|(1931,909)|
+10,0,ICV New Sales,1617,385,37,18,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,C75DFD3253EF6439DD8ECCCEFE84151BBCA772C1,1CB511B211DA0536B253F7C4F02C9D73FFC4F0CB,1,0,0,0,0,192,0,-1--1--1,,1|(1611,456)|
+10,0,INITIAL BASE COST,1768,1057,64,18,8,3,0,0,-1,1,0,0,0,0,0,0,0,0
+10,0,Base cost,2072,1022,59,10,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,02EE7AB658101FC65133E37D0AD3612BDFE95A15,1447B8924AFF91213BB4B081397BD1035F000F6B,1,0,0,0,0,192,0,-1--1--1,,1|(2257,728)|
+1,0,6F80C1996F39E207B4045AEF9E29AEAC8406A1EF,1447B8924AFF91213BB4B081397BD1035F000F6B,1,0,0,0,0,192,0,-1--1--1,,1|(1917,1068)|
+10,0,INITIAL UNIT BATTERY COST,942,900,87,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Unit Battery Cost,1218,860,73,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,A865AFD380951E3F7555C6E7BFB4C84DDDE2D000,39206F1D99270C169C040F18F73908A011604033,1,0,0,0,0,192,0,-1--1--1,,1|(1096,896)|
+10,0,"REFERENCE BATTERY R&D INVESTMENT",851,690,101,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,BATTERY COST LR,903,780,67,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Strength of Battery learning curve,1152,730,87,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,Battery Exp Factor,1304,638,84,29,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,3924EC219576703ED8F21BD05B28CE4076621F7E,0615B455AB42FDF0A84D05CF222576531D3EBB6B,1,0,0,0,0,192,0,-1--1--1,,1|(1297,693)|
+1,0,D545C552739A422CEF1DB10E58D24B108FD0149A,0615B455AB42FDF0A84D05CF222576531D3EBB6B,1,0,0,0,0,192,0,-1--1--1,,1|(1075,614)|
+1,0,1AD4946FB8C711ED94D93D6672DA98E602A14561,3924EC219576703ED8F21BD05B28CE4076621F7E,1,0,0,0,0,192,0,-1--1--1,,1|(1048,783)|
+1,0,0615B455AB42FDF0A84D05CF222576531D3EBB6B,39206F1D99270C169C040F18F73908A011604033,1,0,0,0,0,192,0,-1--1--1,,1|(1364,816)|
+10,0,"Cumulative Battery R&D Investment",1162,475,97,42,3,3,0,0,-1,0,0,0,0,0,0,0,0,0
+12,0,48,752,475,10,8,0,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,A7C8249C053EC2D6510EEC80CBE22CE1329C2D3C,DAA839B181507E749D5509C0E157F3ABD8340B1C,100,0,0,22,0,192,0,-1--1--1,,1|(834,475)|
+1,0,A7C8249C053EC2D6510EEC80CBE22CE1329C2D3C,916C24FAEE2C72547580C18E98F593F9DA6D8F11,4,0,0,22,0,192,0,-1--1--1,,1|(992,475)|
+11,0,0,913,475,6,8,34,3,0,0,1,0,0,0,0,0,0,0,0,0
+10,0,"Battery R&D Investment",913,525,72,42,40,3,0,0,-1,0,0,0,0,0,0,0,0,0
+10,0,"Annual R&D Investment",819,353,72,42,8,3,0,0,-1,0,0,0,0,0,0,0,0,0
+1,0,F5427FF6D7B3F122A6A6DD67B440132375B68AC0,A7C8249C053EC2D6510EEC80CBE22CE1329C2D3C,1,0,0,0,0,192,0,-1--1--1,,1|(822,417)|
+1,0,916C24FAEE2C72547580C18E98F593F9DA6D8F11,0615B455AB42FDF0A84D05CF222576531D3EBB6B,1,0,0,0,0,192,0,-1--1--1,,1|(1328,515)|
+10,0,"REFERENCE BATTERY R&D INVESTMENT",1149,325,103,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,7DE939A1492C16499D7D13B4C7B961ACF1F4BF47,916C24FAEE2C72547580C18E98F593F9DA6D8F11,0,0,0,0,0,192,1,-1--1--1,,1|(0,0)|
+10,0,Reference ICV Engine Production level,1823,-474,84,42,8,2,0,3,-1,0,0,0,128-128-128,0-0-0,|||128-128-128,0,0,0,0,0,0
+1,0,38803608792014B51A0DC32EB550B8D885041610,D945BB4DFC25C9019349938E8E3403DF5BD40469,1,0,0,0,0,192,1,-1--1--1,,1|(1867,-431)|
+///---\\\
+:GRAPH Vehicle_Market
+:TITLE Vehicle Populations in Norway
+:SCALE
+:VAR EV Stocks
+:DATASET 
+:LINE-WIDTH 2
+:VAR ICV Stocks
+:DATASET 
+:LINE-WIDTH 2
+:VAR total vehicle market
+:DATASET 
+:LINE-STYLE DOT
+:LINE-WIDTH 2
+
+:GRAPH Market_shares
+:TITLE Vehicle market shares
+:SCALE
+:VAR EV Market Share
+:Y-MAX 1
+:DATASET 
+:LINE-WIDTH 1
+:SCALE
+:VAR ICV Market share
+:Y-MAX 1
+:DATASET 
+:LINE-WIDTH 1
+:L<%^E!@
+1:Norway Sensi 1.vdfx
+1:Norway Sensi 2.vdfx
+1:Norway Sensi 1_POLICY END DATE+10%.vdfx
+1:Norway Sensi 1_POLICY END DATE-10%.vdfx
+1:Norway 1.vdfx
+4:Time
+5:charger to EV ratio
+9:Norway Sensi 1
+19:88,2
+24:2008
+25:2050
+26:2050
+22:People,Person
+22:Days,Day
+22:Dollars,USD
+23:0
+15:0,0,0,0,0,0
+27:0,
+34:32,
+42:0
+72:0
+73:0
+95:0
+96:0
+97:0
+77:0
+78:0
+102:1
+93:1
+94:2
+92:0
+91:0
+90:0
+87:0
+75:index.dic
+43:
+103:8,8,8,3,8
+105:0,0,0,0,0,0,0,0,0,0
+104:Vensim Sans|12||0-0-0|0-0-0|-1--1--1|0-0-255|192-192-192|-1--1--1
